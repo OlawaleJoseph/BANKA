@@ -39,5 +39,13 @@ const sideMenu = function(){
     })
 }
 
+
+const run = () => {
     openNcloseSideNav();
     sideMenu();
+
+}
+
+run();
+
+   
