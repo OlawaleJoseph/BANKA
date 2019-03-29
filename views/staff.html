@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>STAFF DASHBOARD</title>
+    <link rel="stylesheet" href="../css/staff.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+</head>
+<body>
+    <div id="container">
+        <header>
+            <nav id="nav"> 
+                <div id="bars">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <a href="../index.html" id="logo">BANKA</a>
+                <a href="../index.html"id="logout">Logout</a>
+            </nav>
+        </header>
+    
+        <nav id="side-navbar">
+            <div id="close-btn">&times;</div>
+            <div id="side-menu">
+                Welcome, <span>Name</span> 
+                <p>Staff Id</p>
+                <div id="staff-picture"></div>  
+            </div>
+        
+            <div id="side-nav">
+                <a data-target="#transaction" class="links" id="transaction-link">Transactions</a>
+                <a data-target="#accounts-div" class="links">Accounts</a>
+                
+                </div>
+        </nav>
+        <div id="content">
+            <div id="transaction" class="displayDivs">
+                <div class="centered-divs">
+                    <form action="" method="POST">
+                        <label for="">Account Number
+                            <input type="text" name="" id="">
+                        </label>
+                        <label for="">Amount
+                            <input type="text" name="" id="">
+                        </label>
+                        <label for="transaction-type">Transaction Type:
+                            <select name="transaction-type" id="transaction-type" required>
+                                <option value="" selected disabled></option>
+                                <option value="debit">Debit</option>
+                                <option value="credit">Credit</option>
+                            </select>
+                        </label>
+                        <label for="pin">PIN
+                            <input type="text" name="cashier-pin" id="cashier-pin">
+                        </label>
+                        <button> Done </button>
+                    </form>
+                </div> 
+                
+            </div>
+
+            
+
+        <footer>&copy; BANKA 2019.</footer>
+
+    </div>
+    
+    <script src="../javascript/staff.js"></script>
+</body>
+</html>
