@@ -212,6 +212,59 @@ form button{
 }
 
 
+#all-accounts{
+    border-top: 1px solid black;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+div#all-accounts div.user-account{
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #e9c8b8
+
+}
+
+#all-accounts .user-account h4{
+    padding: 0.5rem;
+}
+
+#content #single-account-div{
+    padding: 1rem;
+    width: 100%
+}
+
+
+
+
+#single-account-details{
+    width: 50%
+}
+#content #single-account-div h3 {
+    padding: 2rem;
+}
+
+#content #single-account-div button{
+    background-color: rgb(235, 98, 98);
+    font-size: 1.1rem;
+    margin-left: 30%
+
+}
+
+#transaction-history{
+    text-align: center;
+}
+#user-transaction-history{
+ 
+    padding: 100px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
 
 #admin-div{
     grid-template-rows: 1fr 200px;
@@ -220,6 +273,17 @@ form button{
     padding-top: 20px;
 }
 
+.admin{
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#make-admin h3{
+    text-align: center;
+    font-size: 1.5rem;
+    padding-bottom: 30px;
+}
 #admin-div #new-staff-account{
     width: 50%;
 }
@@ -231,6 +295,7 @@ form button{
 #admin-div #account-status{
     width: 50%;
 }
+
 
 footer{
     grid-area: foot;

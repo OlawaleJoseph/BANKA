@@ -183,8 +183,53 @@
                 
             </div>
 
+            <div class="displayDivs" id="admin-div">
+                <div id="new-staff-account" class="divs centered-divs">
+                    <h2>New Staff Account</h2>
+                    <form action="">
+                        <label for="">First Name
+                            <input type="text" name="firstName" id="first-name">
+                        </label>
+                        <label for="">Last Name
+                            <input type="text" name="lastName" id="last-name">
+                        </label>
+                        <label for="">Username
+                            <input type="text" name="Username" id="username">
+                        </label>
+                        <label for="">Password
+                            <input type="password" name="password" id="password">
+                        </label>
+                        <label for="">Confirm Password
+                            <input type="password" name="password2" id="confirmed-password">
+                        </label>
+                        <label for="transaction-type">Will the Staff be an Admin?
+                            <select name="admin-status" id="admin-status" required>
+                                <option value="" selected disabled></option>
+                                <option value="true">YES</option>
+                                <option value="false">NO</option>
+                            </select>
+                        </label>
+                        <label for="pin">PIN
+                            <input type="text" name="staff-pin" id="new-staff-pin">
+                        </label>
+                        <button> CREATE </button>
+                    </form>
+
+                </div>
+
+                <div id="make-admin" class="centered-divs admin">
+                        <h3>UPGRADE TO ADMIN</h3>
+                        <label for="">
+                            Staff Id
+                            <input type="text" placeholder="Staff ID" name="staff-id">
+                        </label>
+                        <button type="button">UPGRADE</button>
+                    </div>
+                
+
+            </div>  
             
-            </div>   
+            
 
         </div>
     
