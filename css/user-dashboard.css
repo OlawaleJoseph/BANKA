@@ -210,6 +210,58 @@ button{
     line-height: 1.5rem;
 }
 
+
+/***** TRANSFER PAGE **********/
+
+
+
+#transaction #transfer-account-info{
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    background-color: #f7dfd4;
+    
+}
+
+#transaction #transfer-account-info #account-balance{
+    justify-self: end;
+}
+
+#transaction #transfer-info {
+    display: grid;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    background-color: #eabcac;
+}
+
+label{
+    padding-top: 1.5rem;
+}
+
+#transaction #transfer-info div{
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+#transaction #transfer-info div label input, #change-password label input, #change-pin label input{
+   padding: 0.7rem;
+   border: none;
+   border-bottom: 1px solid black;
+   background-color: inherit;
+   font-size: 1.1rem;
+   display: block;
+   margin-bottom: 10px;
+   
+}
+
+#transaction #transfer-info button, #change-password button, #change-pin button{
+    padding: 0.5rem 3rem;;
+    justify-self: center;
+    margin-top: 1rem;
+}
+
+
+
 /**************PROFILE PAGE**********************/
 #change-password, #change-pin{
     display: grid;
