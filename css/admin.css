@@ -1,0 +1,291 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: sans-serif;
+}
+
+button{
+    padding: 0.3rem 1.5rem;
+    border-radius: 5px;
+    margin: 5px; 
+    background-color: #4b3621;
+    color: #fff;
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+a:hover, button:hover{
+    cursor: pointer;
+}
+#container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 1fr 30px;
+    grid-template-areas: 
+    "head"
+    "main"
+    "footer";
+    height: 100vh;
+    
+}
+
+header{
+    grid-area: head;
+    grid-column: 1/4;
+}
+header #nav{
+    background-color: #e2b091;
+    display: grid;
+    grid-template-columns: 50px 1fr 70px;
+    height: 100%;
+    align-items: center
+}
+
+#bars{
+    cursor: pointer;
+
+}
+#bars .bar{
+    width: 25px;
+    height: 3px;
+    background-color: #000;
+    margin: 4px auto;
+    
+}
+
+#nav #logo{
+    font-family: 'Lobster', cursive; 
+}
+#nav #logo, #nav #logout{
+    justify-self: center;
+}
+
+#side-navbar{
+    display: flex;
+    flex-direction: column;
+    background-color: #874e4c;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 50px;
+    transform: translateX(-100%);
+    grid-area: side-nav;
+    overflow-y: auto;
+    font-size: 1.5rem
+}
+
+#side-navbar.show{
+    transform: translateX(0)
+}
+
+#side-navbar #close-btn{
+    font-size: 2rem;
+    color: red;
+    cursor: pointer;
+    text-align: right;
+    padding: 0.5rem;
+
+}
+#side-navbar #side-menu{
+    font-size: 1.5rem;
+    color: #fff;
+    padding: 20px 0;
+}
+
+#side-navbar #side-menu #staff-picture{
+    width: 100px;
+    height: 100px;
+    border: 1px solid white;
+    border-radius: 50%;
+    margin: 5px auto;
+
+}
+
+#side-navbar #side-nav{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+}
+
+#side-navbar #side-nav a{
+    font-size: 1.5rem;
+    padding: 1rem;
+    border-bottom: 1px solid black;
+    color: #fff;
+}
+
+#side-navbar #side-nav a:hover{
+    background-color: #a07865;
+    color: #000
+}
+
+#side-navbar #side-nav a:last-child{
+    border-bottom: none;
+
+}
+
+.displayDivs{
+    display: none;
+}
+
+#transaction{
+    display: block;
+}
+
+#content{
+    grid-area: main;
+    border: 1px solid black;
+    grid-column: 1/4;
+    height: 100%;
+    background-color: #eabcac;
+}
+.centered-divs{
+    margin: 0 auto;
+}
+#transaction form{
+    max-width: 50%;
+    margin: 5rem auto;
+}
+
+#transaction form label{
+    margin-bottom: 0.8rem;
+}
+#transaction form label, #transaction form label input[type="text"]{
+    display: block;
+    font-size: 1.3rem;
+}
+
+input{
+    padding: 0.4rem;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: 0;
+    background-color: inherit;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+select{
+    width: 50%;
+    background-color: #643722;
+    color: #fff;
+    font-size: 1.1rem;
+    border: none;
+    outline: 0;
+    margin: 10px 0;
+    display: block;
+}
+
+form button{
+    margin: 20px auto;
+    
+}
+
+
+#accounts-div{
+    display: relative;
+}
+
+#accounts-div #search-for-account{
+    width: 50%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+#accounts-div #search-for-account form{
+    max-width: 200px;
+    margin: 20px auto;
+}
+
+#accounts-div #search-for-account form a{
+    margin-top: 20px;
+}
+
+
+
+#admin-div{
+    grid-template-rows: 1fr 200px;
+    grid-gap: 50px;
+    width: 100%;
+    padding-top: 20px;
+}
+
+#admin-div #new-staff-account{
+    width: 50%;
+}
+
+#admin-div #new-staff-account form{
+    padding-top: 20px;
+} 
+
+#admin-div #account-status{
+    width: 50%;
+}
+
+footer{
+    grid-area: foot;
+    height: 100%;
+    width: 100%;
+    grid-column: 1/4;
+    grid-row: 3/4;
+    background-color: #e2b091;
+    text-align: center;
+    align-self: center;
+    padding-top: 5px;
+}
+
+
+
+
+@media only screen and (min-width: 768px){
+    #container{
+        grid-template-rows: 50px 1fr 30px;
+        grid-template-columns: 250px 1fr;
+        grid-template-areas:
+        "head head"
+        "side-nav main"
+        "foot foot";
+        
+    }
+   
+    header #nav{
+        grid-template-columns: 100px 100px;
+        justify-content: space-between;
+    }
+
+    #bars, #side-navbar #close-btn{
+        display: none;
+    
+    }
+    #side-navbar{
+        position: relative;
+        transform: translateX(0);
+        top: 0;
+    }
+
+    #content{
+        grid-column: 2/4;
+    }
+
+
+    #content #single-account-div{
+        width: 95%;
+        margin: auto;
+        padding: 0.1rem
+
+    }
+
+    #content #single-account-div h2 {
+        padding: 1rem;
+    }
+}
