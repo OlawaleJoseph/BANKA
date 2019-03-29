@@ -98,14 +98,40 @@
 
             </div>
 
+            <div id="login-form-div">
+                <form action="" method="POST" id="login-form">
+                    <span id="close-login-form">&times;</span>
+                    <div id="form-container">
+                        <label for="username">Username</label>
+                        <input type="text" placeholder="Enter Username or Email" name="username" id="username" required class="input">
+            
+                        <label for="password">Password</label>
+                        <input type="password" placeholder="Enter password" name="password" id="password" required class="input">
+
+                        <a href="./views/user-dashboard.html"><button>Login</button></a>    
+                    </div>
+                        
+                    <div id="reset-password">
+                        <div>
+                            <label for="remember-me">Remember me</label>
+                            <input type="checkbox" checked="checked" name="remember-me">
+                        </div>
+                         
+                        
+                        <span class="reset-password">Forgot <a href="./views/password-reset.html" id="reset-password-link">password?</a></span>
+                    </div>
+                        
+                </form>
+
     
             </div>
+
 
             <footer>
                 <p>&copy;Banka 2019</p>
             </footer>
         </div>
         
-        <script src="./js/index.js"></script>
+        <script src="./javascript/index.js"></script>
     </body>
 </html>
