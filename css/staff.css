@@ -209,3 +209,86 @@ form button{
     margin-top: 20px;
 }
 
+
+#all-accounts{
+    border-top: 1px solid black;
+    display: grid;
+    grid-gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+div#all-accounts div.user-account{
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #e9c8b8
+
+}
+
+#all-accounts .user-account h4{
+    padding: 0.5rem;
+}
+
+footer{
+    grid-area: foot;
+    height: 100%;
+    width: 100%;
+    grid-column: 1/4;
+    grid-row: 3/4;
+    background-color: #e2b091;
+    text-align: center;
+    align-self: center;
+    padding-top: 5px;
+}
+
+
+
+
+@media only screen and (min-width: 768px){
+    #container{
+        grid-template-rows: 50px 1fr 30px;
+        grid-template-columns: 250px 1fr;
+        grid-template-areas:
+        "head head"
+        "side-nav main"
+        "foot foot";
+    }
+   
+    header #nav{
+        grid-template-columns: 100px 100px;
+        justify-content: space-between;
+        color: #000;
+    }
+
+
+    #bars, #side-navbar #close-btn{
+        display: none;
+    
+    }
+    #side-navbar{
+        position: relative;
+        transform: translateX(0);
+        top: 0;
+    }
+
+    #side-navbar #side-menu a{
+        color: #000;
+    }
+    #content{
+        grid-column: 2/4;
+    }
+
+
+    #content #single-account-div{
+        width: 95%;
+        margin: auto;
+        padding: 0.1rem
+
+    }
+
+    #content #single-account-div h2 {
+        padding: 1rem;
+    }
+}
