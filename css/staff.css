@@ -231,6 +231,35 @@ div#all-accounts div.user-account{
     padding: 0.5rem;
 }
 
+#content #single-account-div{
+    padding: 1rem;
+    width: 100%
+}
+
+#single-account-details{
+    width: 50%
+}
+#content #single-account-div h3 {
+    padding: 2rem;
+}
+
+#content #single-account-div button{
+    background-color: rgb(235, 98, 98);
+    font-size: 1.1rem;
+    margin-left: 30%
+
+}
+
+#transaction-history{
+    text-align: center;
+}
+#user-transaction-history{
+ 
+    padding: 100px;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
 footer{
     grid-area: foot;
     height: 100%;
