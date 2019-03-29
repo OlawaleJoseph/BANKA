@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/signup.css">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <title>REGISTERATION PAGE</title>
+</head>
+<body>
+    <div id="wrapper">
+        <nav id="navbar">
+            <div id="logo">
+                <a href="../index.html">BANKA</a>  
+            </div>
+            <div id="side-nav">
+                <div class="bars"></div>
+                <div class="bars"></div>
+                <div class="bars"></div>
+            </div>
+            <div class="nav-menu">
+                <a href="#" id="close-btn">&times;</a>
+                <a href="../index.html"><i class="fas fa-home" class="side-nav-link"></i> Home</a>
+                <a href="#about-us" class="side-nav-link">About Us</a>
+                <a href="#contact-page" class="side-nav-link"><i class="fas fa-address-book"></i>Contact Us</a>
+            </div>
+            
+            <a href="../index.html" id="login-btn">Login</a>
+            
+        </nav>
+
+        <div id="container">
+            <p>FILL THE FORM BELOW TO REGISTER</p>
+            <form action="#" method="POST">
+                <div id="form-container">
+                    <legend for="title">Title:</legend>
+                    <fieldset>
+                        <label for=""> Dr <input type="radio" name="title" value="Dr"></label>
+                        <label for="">Mr <input type="radio" name="title" value="Mr"></label>
+                        <label for="">Mrs <input type="radio" name="title" value="Mrs"></label>
+                        <label for="">Ms <input type="radio" name="title" value="Ms"></label> 
+                    </fieldset>
+                    <label>First Name 
+                        <input type="text" name="first-name" id="firstname" required>
+                    </label>
+                    <label>Last Name
+                        <input type="text" name="last-name" id="last-name" required>
+                    </label>
+                    <label>E-mail:
+                        <input type="email" name="email" id="email">
+                    </label required>
+                    <label>Username 
+                        <input type="text" name="username" id="-form-username" required>
+                    </label>
+                    <label>Password 
+                        <input type="password" name="password" id="form-password" pattern=".{8,}" title="Minimum of 8 characters">
+                    </label>
+                    <label>Re-type Password: 
+                        <input type="password" name="password-confirmation" id="confirm-password">
+                    </label>
+                    <label for="user-picture">Profile Picture 
+                        <input type="file" name="user-picture" id="image-upload">
+                    </label>
+                    <label>Account Type 
+                        <select name="account-type" id="account-type">
+                            <option value="" selected disabled></option>
+                            <option value="savings"> Savings </option>
+                            <option value="current"> Current </option>
+                        </select>
+                    </label>
+                    <button action="#" id="submit" type="submit">Submit</button>
+                </div>
+                
+            </form>
+    
+            <div id="registered">
+                <p>Already registered? <a href="../index.html">Login</a> </p>
+            </div>
+            
+        </div>
+        <footer>&copy; BANKA 2019</footer>
+        <script src="../js/signup.js"></script>
+    </body>
+    
+</html>

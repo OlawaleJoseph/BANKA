@@ -1,0 +1,264 @@
+*{
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 0;
+}
+
+body{
+    font-family: sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+#wrapper{
+    display: grid;
+    grid-template-rows: 50px 2fr 30px;
+    grid-template-areas: 
+    "nav"
+    "form"
+    "footer";
+    height: 100vh;
+}
+#navbar{
+    display: grid;
+    grid-template-columns:50px 3fr 1fr;
+    grid-template-areas: "menu-bars brand login";
+    grid-area: nav;
+    align-content: center;
+    background-color: #e2b091;
+    align-items: center;
+    grid-area: nav;
+}
+#navbar #side-nav{
+    padding: 0.3rem;
+    grid-area: menu-bars;
+}
+#navbar #side-nav .bars{
+    height: 3px;
+    margin-top: 2px;
+    width: 20px;
+    background-color: #000
+}
+#logo{
+    padding: 0.3rem;
+    grid-area: brand;
+    font-size: 1rem;
+    justify-self: center;
+    font-family: 'Lobster', cursive;
+}
+
+.nav-menu{
+    text-align: center;
+    width: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.9);
+    position: absolute;
+    top: 0;
+    left: 0; 
+    transition: all 0.5s ease-in-out;
+    background-color: #874e4c;
+    display: flex;
+    flex-direction: column
+}
+
+#navbar .nav-menu #close-btn{
+    position: relative;
+    left: 85%;
+    top: -0.9rem;
+    cursor: pointer;
+    max-width: 50px;
+    font-size: 2rem
+}
+
+#navbar .nav-menu a{
+    padding: 1rem;
+    display: block;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+#navbar .nav-menu a:first-child{
+    margin-bottom: 20px;
+}
+
+#navbar .nav-menu a:hover{
+    background-color: #a07865;
+    color: #000;
+}
+
+
+#login-btn{
+    padding: 1rem;
+    font-size: 1.1rem;
+    grid-area: login;
+    justify-self: end;
+}
+
+#container{
+    background-color: #eabcac;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    grid-area: form;
+}
+
+#container p{
+    font-size: 1.3rem;
+    padding: 0.5rem;
+    text-align: center;
+    border-bottom: 1px solid black;
+    border-width: 80%
+}
+
+#registered p{
+    border: none;
+}
+
+#form-container{
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: #eabaac;
+    color: #000
+}
+
+#form-container fieldset label{
+    display: inline-block;
+}
+
+#form-container input[type=text], #form-container input[type="email"], select, #form-container input[type="password"]{
+    display: block; 
+	border: 0;
+    outline: 0;
+    border-bottom: 1px solid black;
+	background-color: inherit;
+    font-size: 1.2rem;
+    width: 100%;
+}
+
+
+#form-container input[type="file"]{
+    display: none;
+}
+
+#form-container label[for=user-picture]{
+    margin-bottom: 10px;
+	border: 0;
+    outline: 0;
+    border-bottom: 1px solid #000
+}
+
+select{
+    width: 100%;
+    background-color: #643722;
+    color: #fff;
+    font-size: 1.3rem;
+    border: none;
+    outline: 0;
+}
+
+#form-container label #image-upload{
+    display: inline-block;
+    border-radius: 5px;
+    padding: 0.3rem;
+    width: 100px;
+    background-color: rgb(175, 105, 64); 
+    text-align: center;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3)
+}
+
+label, legend{
+    padding: 0.5rem;
+    display: block;
+}
+
+input[type="radio"]{
+    margin-right: 40px;
+    
+}
+
+#submit{
+	display: block;
+	border-radius: 5px;
+	background-color: #4b3621;
+	width: 50%;
+    margin: 0 auto 20px auto;
+    font-size: 1.2rem;
+    padding: 5px 0;
+    color: #fff;
+
+
+}
+ #submit:hover,  input[type="radio"]:hover{
+	cursor: pointer;
+}
+
+#container #registered{
+    font-size: 1.3rem;
+}
+
+#registered a{
+    color: rgb(11, 165, 204);
+    
+}
+
+footer{
+    grid-area: footer;
+    text-align: center;
+    background-color: #dbf4a7;
+    align-self: center;
+    padding: 0.4rem;
+    background-color: #e2b091;
+}
+
+@media screen and (min-width: 768px){
+    /* NAVBAR*/
+    #navbar #side-nav, #navbar .nav-menu #close-btn{
+        display: none;
+    }
+
+    #navbar{
+        grid-template-areas: "brand nav-menu login";
+        grid-template-columns: 150px 1fr 100px;
+        padding: 0.5rem;
+    }
+
+    #logo{
+        text-align: center;
+        padding: 0.5rem
+    }
+
+    #navbar .nav-menu a{
+        color: #000;
+    }
+    #navbar .nav-menu{
+        flex-direction: row;
+        width: auto !important;
+        position: relative;
+        height: inherit;
+        align-self: center;
+        background-color: inherit;
+        grid-area: nav-menu;
+        
+    }
+
+    #navbar .nav-menu a{
+        font-size: 1.2rem;
+        padding: 0;
+        flex: 1;
+        line-height: 1.5rem;
+
+    }
+
+    #login-btn{
+        justify-self: end;
+    }
+}
