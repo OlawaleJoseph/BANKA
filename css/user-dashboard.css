@@ -1,0 +1,192 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: 0;
+}
+/********GENERAL STYLE RULES*********/
+body{
+    background-color: darkgrey;
+    font-family: sans-serif;
+}
+
+
+a{
+    text-decoration: none;
+    color: #000;
+}
+
+ul{
+    list-style-type: none;
+}
+
+button{
+    padding: 0.2rem 1rem;
+    background-color: #4b3621;
+    outline: 0;
+    cursor: pointer;
+    border-radius: 5px;
+    color: #fff;
+}
+/*****DEFINE GRID AREAS*****/
+#main{
+    display: grid;
+    grid-template-rows: 50px 1fr 30px;
+    grid-template-areas: 
+    "nav"
+    "content"
+    "footer";
+    height: 100vh;
+    
+}
+
+/**********************UPPER NAVBAR*********************/
+#upper-nav{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: #e2b091;
+    grid-area: nav;
+}
+
+#upper-nav a{
+    text-decoration: none;
+    padding: 0.4rem;
+    font-size: 1.5rem;
+}
+
+#upper-nav #bars{
+    margin-left: 10px;
+    align-self: center;
+    padding: 0.4rem;
+    cursor: pointer;
+}
+
+#upper-nav #bars .bar{
+    width: 30px;
+    height: 2px;
+    background-color: black;
+    margin-top: 5px;
+}
+
+
+#upper-nav #logout-btn{
+    justify-self: end;
+}
+
+#upper-nav #brand-logo{
+    justify-self: center;
+    font-family: 'Lobster', cursive;
+}
+/*********************************************************/
+
+/******************SIDE NAVBAR**************/
+
+/* Welcome Area*/
+#side-menu{
+    height: 95vh;
+    width: 100%;
+    background-color: #874e4c;
+    color: antiquewhite;
+    position: absolute;
+    z-index: 1;
+    display: none;
+}
+#side-menu #close-btn{
+    position: absolute;
+    right: 0.5rem;
+    top: 0;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+#side-menu #welcome-message{
+    display: grid;
+    grid-template-rows: 50px 20px 100px;
+    justify-content: center;
+    padding-top: 50px;
+    text-align: center;
+}
+
+#side-menu #welcome-message #profile-photo{
+    border: 1px solid #fff;
+    border-radius: 50%;
+    cursor: pointer;
+
+}
+
+/* NAV LINKS*/
+#side-menu #side-nav{
+    display: grid;
+    grid-template-rows: repeat(4, 40px);
+    text-align: center;
+    margin-top: 20px;
+    
+}
+
+#side-menu #side-nav a{
+    text-decoration: none;
+    color: aliceblue;
+    width: 100%;
+    padding: 10px 30px;
+    font-size: 1.5rem;
+    align-self: center;
+
+    
+}
+
+#side-menu #side-nav a:hover{
+    background-color: #a07865;
+    color: black;
+    cursor: pointer;
+}
+
+
+
+/*************************************************/
+/*Display Div*/
+
+#content{
+    grid-area: content;
+}
+.display-div{
+    display: none;
+    height: 100%
+}
+
+.dashboard-div{
+    display: block;
+}
+/* ACCOUNT DETAILS SECTION*/
+
+#account-info{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas: 
+    "acc_no balance"
+    "none last_seen";
+    background-color: #f7dfd4;
+    padding: 1rem;
+    width: 100%;
+    font-weight: 800;
+    text-transform: uppercase;
+
+}
+
+#account-info #acc-number{
+    grid-area: acc_no;
+}
+
+#account-info #acc-balance{
+    grid-area: balance;
+    justify-self: end;
+}
+
+#account-info #last_seen{
+    grid-area: last_seen;
+    text-align: right;
+}
+
+
+#account-info div{
+    padding: 10px 5px;
+}
