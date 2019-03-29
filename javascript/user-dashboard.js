@@ -21,7 +21,7 @@ const sideMenu = function(){
                 div.style.display = "none";
             });
             const id = this.getAttribute("data-id");
-            if(id == '#transaction'){
+            if(id == '#transaction'|| id =='#profile'){
                 document.querySelector(id).style.display = "grid";
                 if(window.innerWidth < 768){
                     sideNav.style.display = "none";
