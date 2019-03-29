@@ -190,3 +190,21 @@ button{
 #account-info div{
     padding: 10px 5px;
 }
+#transaction-history{
+    background-color: #eabcac;
+    text-align: center;
+    font-size: 1.3rem;
+    line-height: 1.5rem;
+}
+#transaction-history h3{
+    padding: 0.5rem
+}
+
+#transaction-history ul li{
+    padding: 10px 5px;
+    border-bottom: dashed 1px brown;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 1.3rem;
+    line-height: 1.5rem;
+}
