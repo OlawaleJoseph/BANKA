@@ -1,0 +1,23 @@
+{
+  "name": "banka",
+  "version": "1.0.0",
+  "description": "Banka is a light-weight core banking application that powers banking operations like account",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OlawaleJoseph/BANKA.git"
+  },
+  "keywords": [
+    "Banking",
+    "Finance"
+  ],
+  "author": "Adedeko Olawale",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OlawaleJoseph/BANKA/issues"
+  },
+  "homepage": "https://github.com/OlawaleJoseph/BANKA#readme"
+}
