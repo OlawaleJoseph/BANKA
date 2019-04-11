@@ -40,4 +40,14 @@ describe('Transaction Model', () => {
       assert.hasAnyKeys(transaction, ['id', 'amount', 'createdDate', 'status'], 'Object should have all the specified keys');
     });
   });
+
+  describe("GetAllTransactions() should return an array of all transactions in the database", () => {
+    it("Should return an array", () => {
+        transactionModel.createTransaction('20000.89')
+    const transactions = transactionModel.getAllTransactions();
+
+    assert.isArray(transactions, "transactions should be an array");
+    });
+
+  });
 });
