@@ -290,6 +290,33 @@ describe('Users Model', () => {
            const deletedId = userModel.getAUser(deletedUser.email)
            assert.isNull(deletedId, "The id ID of the deleted user should not be in the database anymore")
         });
-    })
+    });
+
+    describe("generateToken(email)", () => {
+
+        it("should should return null if ID is invalid/ not registered", async () => {
+            const invalidEmail = await userModel.generateToken("abc");
+
+            assert.isNull(invalidEmail, "Invalid Id should be null");
+        });
+
+        it("should generate a token for a valid id", async () =>{
+            const staff = {
+                firstName: "Mike",
+                lastName: "Jordan",
+                email: "bankaadc@gmail.com",
+                password: "password",
+                type: "staff",
+                isAdmin: false
+            }
+            const user = await userModel.createUser(staff);
+            const token = await userModel.generateToken(user.email);
+
+            assert.isNotNull(token, "should not be null");
+            assert.isString(token, "token shoud be a string");
+            assert.isAbove(token.length, 20, "token should be longer than 20");
+        });
+        
+    });
 
 })
