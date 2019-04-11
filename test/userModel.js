@@ -1,5 +1,6 @@
 import chai from 'chai';
 import userModel from '../models/users';
+import moment from 'moment';
 
 const assert = chai.assert;
 
@@ -213,6 +214,55 @@ describe('Users Model', () => {
             }))
         });
   
+    });
+
+    describe("UpdateUser()", () => {
+        
+        it("Should call getAUser()", () => {
+            assert.call(userModel.updateUser,userModel.getAUser, "It should call getAUser()");
+        });
+
+        it("Should return null if the id is invalid", async() => {
+            const updatedUser = await userModel.updateUser(0, "newPassword");
+            assert.isNull(updatedUser, "updatedUser should be null");
+        });
+
+        it("Should return null if newPassword field is empty", async () => {
+            const updatedUser = await userModel.updateUser(1, "");
+            assert.isNull(updatedUser, "updatedUser should be null");
+        });
+
+        it("Should change the the user password", async () => {
+            const client = {
+                firstName: "Mike",
+                lastName: "Jordan",
+                email: "bankaadc@gmail.com",
+                password: "password",
+                type: "staff",
+                isAdmin: false
+            }
+            const staff = await userModel.createUser(client);
+            const user = userModel.getAUser(staff.email)
+            const oldPassword= user.password;
+            const updatedUser = await userModel.updateUser(user.email, "newpassword");
+            const newPassword = updatedUser.password;
+
+            assert.notEqual(oldPassword, newPassword, "Old password should not be equal to newPassword")
+        });
+
+        it("Should return an Object", async () => {
+            const client = {
+                firstName: "Mike",
+                lastName: "Jordan",
+                email: "bankaadc@gmail.com",
+                password: "password",
+                type: "staff",
+                isAdmin: false
+            }
+            const user = await userModel.createUser(client);
+            const updatedUser = await userModel.updateUser(user.email, "newpassword");
+            assert.isObject(updatedUser, "updatedUser should be an object");
+        });
     });
 
 })
