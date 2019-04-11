@@ -351,4 +351,12 @@ describe('Users Model', () => {
         });
     });
 
+    describe("generateRanmdomPassword()", () => {
+        it("should return String", () => {
+            const password = userModel.generateRandompassword();
+
+            assert.isString(password, "password should be string")
+        });
+    })
+
 })
