@@ -41,13 +41,24 @@ describe('Transaction Model', () => {
     });
   });
 
-  describe("GetAllTransactions() should return an array of all transactions in the database", () => {
-    it("Should return an array", () => {
-        transactionModel.createTransaction('20000.89')
-    const transactions = transactionModel.getAllTransactions();
+  describe('GetAllTransactions() should return an array of all transactions in the database', () => {
+    it('Should return an array', () => {
+      transactionModel.createTransaction('20000.89');
+      const transactions = transactionModel.getAllTransactions();
 
-    assert.isArray(transactions, "transactions should be an array");
+      assert.isArray(transactions, 'transactions should be an array');
     });
+  });
 
+  describe('deleteTransaction(id) should delete the transaction with the given id from the database', () => {
+    Array(4).fill().forEach(item => transactionModel.createTransaction(20000));
+
+    it('It should delete the transaction with the specified id from the database', () => {
+      const transaction = transactionModel.createTransaction('20000.89');
+      transactionModel.deleteTransaction(transaction.id);
+      const deletedTransaction = transactionModel.getATransaction(transaction.id);
+
+      assert.isNull(deletedTransaction, 'It should be null');
+    });
   });
 });
