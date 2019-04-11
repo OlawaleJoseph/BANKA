@@ -110,6 +110,61 @@ describe('Users Model', () => {
         })
     });
 
+    describe("ResetPassword(email)", () => {
+
+        it("Should return null for an unregistered user/email", async () => {
+            const user = await userModel.resetPassword("aaaa@gmail.com");
+            assert.isNull(user, "User email should be null");
+        });
+
+        it("Should call the generateRandomPasssword()", () => {
+            
+            assert.call(userModel.resetPassword, userModel.generateRandompassword, "ResetPassword should call the generateRandomPassword function");
+        });
+
+        it("Should call updateUser()",  () => {
+            assert.call(userModel.resetPassword, userModel.updateUser);
+        });
+
+        it("should return an Object containing the random password and the user", async () => {
+            const staff = {
+                firstName: "Mike",
+                lastName: "Jordan",
+                email: "seun@gmail.com",
+                password: "password",
+                type: "staff",
+                isAdmin: false
+            }
+            const user = await userModel.createUser(staff);
+            const info = await userModel.resetPassword(user.email);
+            assert.isObject(info, "user should be an object");
+            assert.hasAllKeys(info, ["randomPassword", "updatedUser"]);
+        });
+
+        it("Random password should be string", async() => {
+            const info = await userModel.resetPassword("bankaadc@gmail.com");
+            const password = info.randomPassword;
+            
+            assert.isNotEmpty(password, "Password should not be empty");
+            assert.isString(password, "password should be string");
+        });
+
+        it("Updated user should be an Object", async () => {
+            const staff = {
+                firstName: "Mike",
+                lastName: "Jordan",
+                email: "abc123@gmail.com",
+                password: "password",
+                type: "staff",
+                isAdmin: false
+            }
+            const client = await userModel.createUser(staff);
+            const info = await userModel.resetPassword(client.email);
+            const user = info.updatedUser;
+            assert.isObject(user, "user should be an Object")
+        })
+    });
+
     describe("getAUser()", () => {
         it("Should return null for an invalid user id", ()=> {
             const user = userModel.getAUser(2)
