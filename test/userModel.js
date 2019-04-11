@@ -69,4 +69,25 @@ describe('Users Model', () => {
         })
     });
 
+    describe("getAUser()", () => {
+        it("Should return null for an invalid user id", ()=> {
+            const user = userModel.getAUser(2)
+            assert.isNull(user, "User should be null")
+        });
+
+        it("Should return user for a valid user id", async ()=> {
+            const staff = {
+                firstName: "Mike",
+                lastName: "Jordan",
+                email: "bankaadc@gmail.com",
+                password: "password",
+                type: "staff",
+                isAdmin: false
+            }
+            const client  = await userModel.createUser(staff);
+            const user = userModel.getAUser(client.email);
+            assert.isObject(user, "user should be an object")
+        });
+    });
+
 })
