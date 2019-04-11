@@ -81,4 +81,36 @@ describe("Account Model", () => {
             assert.isArray(accounts, "Accounts should be an array");
         });
     });
+
+    describe("updateAccount() It should update the account's status property", () => {
+        it("Return null if no account number is given", () => {
+            const emptyId = accountModel.updateAccount("", "dormant");
+            const invalidID = accountModel.updateAccount(0, "dormant");
+            assert.isNull(emptyId);
+            assert.isNull(invalidID);
+        });
+
+        it("should update the status of the specified account", () => {
+            const Info = {
+                "type": "current",
+                "amount": 5000.37,
+            };
+            const account = accountModel.createAccount(Info);
+            const oldStatus = account.status;
+            const updatedAccount = accountModel.updateAccount(account.accountNumber, "dormant");
+            const newStatus = updatedAccount.status;
+
+            assert.notEqual(oldStatus, newStatus, "The status should be different")
+        });
+
+        it("returns the updated account object", () => {
+            const info = {
+                "type": "current",
+                "amount": 5000.37,
+            };
+            const account = accountModel.createAccount(info);
+            const updatedAccount = accountModel.updateAccount(account.accountNumber, "dormant");
+            assert.isObject(updatedAccount, "updated account should be an object")
+        });
+    });
 })
