@@ -41,4 +41,34 @@ describe("Account Model", () => {
         });
         
     });
+
+    describe("getAccount() should return account with the specified account number", () => {
+        
+          
+        it("should return null if no account number is given", () => {
+            const account = accountModel.getAccount();
+
+            assert.isNull(account, "account should be null for empty account number")
+        });
+
+        it("should return null if invalid account number is given", () => {
+          const account = accountModel.getAccount(0);
+
+          assert.isNull(account, "account should be null for invalid account number")
+      });
+
+      it("Should return account object for a valid account number", () =>{
+          const newAccountInfo = {
+              "type": "current",
+              "amount": 5000.37,
+          };
+          const newAccount = accountModel.createAccount(newAccountInfo);
+          const id = newAccount.accountNumber;
+          
+          const searchedAccount = accountModel.getAccount(id);
+
+          assert.isObject(searchedAccount, "Should be an object");
+          assert.hasAnyKeys(searchedAccount, ["accountNumber", "id"], "it should have account number as property");
+          assert.equal(searchedAccount.accountNumber, newAccount.accountNumber, "It should return the account with the same account number that is requested")
+      });
 });
