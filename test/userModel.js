@@ -69,6 +69,47 @@ describe('Users Model', () => {
         })
     });
 
+
+    describe("login()", () => {
+        
+        it("Should return null for wrong email", async () => {
+          
+            const wrongEmail = await userModel.login("a", "password");
+            assert.isNull(wrongEmail, "Wrong email should return null");
+        });
+
+        it("Should return null for wrong password", async () => {
+            const client = {
+                firstName: "Mike",
+                lastName: "Jordan",
+                email: "abcde@gmail.com",
+                password: "password",
+                type: "client",
+            }
+            const user = await userModel.createUser(client);
+            const wrongPassword = await userModel.login(user.email, "a");
+           
+            assert.isNull(wrongPassword, "Wrong email should return null");
+        });
+
+        it("Should return user object for users with the right login credentials", async () => {
+            const user = {
+                firstName: "Moses",
+                lastName: "John",
+                email: "abc@gmail.com",
+                password: "password",
+                type: "staff",
+                isAdmin: false
+            }
+            const createdUser = await userModel.createUser(user);
+            const client = await userModel.login(createdUser.email, "password");
+            
+            assert.isNotNull(client, "User should not be empty");
+            assert.isObject(client, "User should be an Object");
+            
+        })
+    });
+
     describe("getAUser()", () => {
         it("Should return null for an invalid user id", ()=> {
             const user = userModel.getAUser(2)
