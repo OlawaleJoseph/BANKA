@@ -113,4 +113,28 @@ describe("Account Model", () => {
             assert.isObject(updatedAccount, "updated account should be an object")
         });
     });
+
+    describe("deleteAccount(number) should delete an account with the account number", () => {
+
+        it("should return null for an invalid or no account number", () => {
+            const emptyId = accountModel.deleteAccount("", "dormant");
+            const invalidID = accountModel.deleteAccount(0, "dormant");
+
+            assert.isNull(emptyId, "No account number should return null");
+            assert.isNull(invalidID, "Invalid account number should return null")
+        });
+
+        it("It deletes an account with the given account number", () => {
+            const info = {
+                "type": "current",
+                "amount": 5000.37,
+            };
+            const account = accountModel.createAccount(info);
+            accountModel.deleteAccount(account.accountNumber);
+            const deletedUser = accountModel.getAccount(account.accountNumber);
+
+            assert.isNull(deletedUser);
+        });
+    });
+    
 })
