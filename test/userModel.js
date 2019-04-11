@@ -319,4 +319,36 @@ describe('Users Model', () => {
         
     });
 
+    describe("decodeToken(token)", () => {
+        
+        it("should return null if no token is provided", () => {
+            const decodedToken =  userModel.decodeToken("");
+        
+            assert.isNull(decodedToken, "decodedToken should be null");
+        });
+
+        it("Should return undefined for an invalid Token", () => {
+            const decodedToken =  userModel.decodeToken("jjlkls");
+
+            assert.isUndefined(decodedToken, "DecodedToken should be undefine for an invalid token")
+        })
+
+        it("should return a user object with a valid token", async () => {
+            const staff = {
+                firstName: "Mike",
+                lastName: "Jordan",
+                email: "bankaadc@gmail.com",
+                password: "password",
+                type: "staff",
+                isAdmin: false
+            }
+            const user = await userModel.createUser(staff);
+            const token = await userModel.generateToken(user.email)
+            const userObj = await userModel.decodeToken(token);
+            
+            assert.isObject(userObj, "userObj should be an object");
+            assert.hasAnyKeys(userObj, ["id", "type", "isAdmin", "iat"], "userObj should have all the specified keys");
+        });
+    });
+
 })
