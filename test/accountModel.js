@@ -136,5 +136,15 @@ describe("Account Model", () => {
             assert.isNull(deletedUser);
         });
     });
+
+    describe("generateAccountNumber() will generate account numbers when invoked", () => {
+        it("should return a ten digit Integer", () => {
+            const accountNumber  = accountModel.generateAccountNumber();
+            assert.isNumber(accountNumber, "Account number should be an Integer");
+            assert.lengthOf(accountNumber.toString(), 10, "Account number should be 10 digits long")
+        });
+
+        
+    });
     
 })
