@@ -71,4 +71,14 @@ describe("Account Model", () => {
           assert.hasAnyKeys(searchedAccount, ["accountNumber", "id"], "it should have account number as property");
           assert.equal(searchedAccount.accountNumber, newAccount.accountNumber, "It should return the account with the same account number that is requested")
       });
-});
+
+    });
+
+    describe("getAllAccounts() It should get all accounts in database", ()=> {
+        it("Should return an Array of account objects", () => {
+            const accounts = accountModel.getAllAccounts();
+
+            assert.isArray(accounts, "Accounts should be an array");
+        });
+    });
+})
