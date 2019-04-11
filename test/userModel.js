@@ -265,4 +265,31 @@ describe('Users Model', () => {
         });
     });
 
+    describe("deleteUser()", () => {
+        
+        it("should call getAUser", () => {
+            assert.call(userModel.deleteUser, userModel.getAUser);
+        });
+
+        it("Should return null for an invalid id", () =>{
+            const user = userModel.deleteUser(99);
+            assert.isNull(user, "user should be null for an invalid id");
+        });
+
+        it("Should delete the user with the spcified id from the usersDb", async () => {
+            const newStaff = {
+                "firstName": "Jude",
+                "lastName": "John",
+                "email": "doe@gmail.com",
+                "password": "password",
+                "type": "staff",
+                "isAdmin": true
+            }
+           const staff = await userModel.createUser(newStaff);
+           const deletedUser = userModel.deleteUser(staff.id);
+           const deletedId = userModel.getAUser(deletedUser.email)
+           assert.isNull(deletedId, "The id ID of the deleted user should not be in the database anymore")
+        });
+    })
+
 })
