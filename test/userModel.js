@@ -186,4 +186,33 @@ describe('Users Model', () => {
         });
     });
 
+    describe("GetAllUsers()", () => {
+        const user = {
+            "id": userModel.usersDb.length,
+            "firstName": "mike",
+            "lastName": "jordan",
+            "email": "bankaadc@gmail.com",
+            "password": "password",
+            "type": "staff",
+            "isAdmin": "true",
+            "createdDate": moment()
+        }
+        userModel.usersDb.push(user);
+        const users = userModel.getAllUsers();
+        it("Should return an array", () => {
+            
+
+            assert.isArray(users, "users should be an array");
+        
+        });
+
+        it("should return an array containing user objects", () => {
+            users.forEach((user => {
+                assert.isObject(user, "user should be an object");
+                assert.hasAnyKeys(user, ["id", "firstName", "lastName", "password", "email", "createdDate", "type", "isAdmin" ], "user object should have the required keys")
+            }))
+        });
+  
+    });
+
 })
