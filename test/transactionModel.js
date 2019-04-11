@@ -1,25 +1,43 @@
 import chai from 'chai';
 import transactionModel from '../models/transaction';
 
-const assert = chai.assert;
+const { assert } = chai;
 
-describe("Transaction Model", () => {
-
-    describe("createTransaction() will create new transaction", () => {
-        it("returns an object", () =>{
-            const transaction = transactionModel.createTransaction("300000");
-            assert.isObject(transaction, "Transaction should be an object");
-
-        });
-
-        it("The transaction Object should contain keys id, createdOn, amount", () =>{
-            const transaction = transactionModel.createTransaction("300000");
-            assert.hasAllKeys(transaction, ["amount", "createdOn", "id", "status"], "Transaction should have keys id, amount and createdOn");
-        });
-
-        it("It should save the transaction Object in the database", () => {
-            const transaction = transactionModel.createTransaction("300000");
-            assert.include(transactionModel.transactionsDb, transaction, "Transaction object should be saved in the database")
-        });
+describe('Transaction Model', () => {
+  describe('createTransaction() will create new transaction', () => {
+    it('returns an object', () => {
+      const transaction = transactionModel.createTransaction('300000');
+      assert.isObject(transaction, 'Transaction should be an object');
     });
+
+    it('The transaction Object should contain keys id, createdOn, amount', () => {
+      const transaction = transactionModel.createTransaction('300000');
+      assert.hasAllKeys(transaction, ['amount', 'createdOn', 'id', 'status'], 'Transaction should have keys id, amount and createdOn');
+    });
+
+    it('It should save the transaction Object in the database', () => {
+      const transaction = transactionModel.createTransaction('300000');
+      assert.include(transactionModel.transactionsDb, transaction, 'Transaction object should be saved in the database');
+    });
+  });
+
+  describe('getATransaction() should get a the transaction with the given id', () => {
+    it('Should return null for ', () => {
+      const transaction = transactionModel.getATransaction();
+      assert.isNull(transaction, 'Transaction should be null');
+    });
+
+    it('Should return null for an invalid transaction id', () => {
+      const transaction = transactionModel.getATransaction();
+      assert.isNull(transaction, 'Transaction should be null for an invalid id');
+    });
+
+    it('Should return an object for a validtransaction id', () => {
+      const newTransaction = transactionModel.createTransaction('30000');
+      const transaction = transactionModel.getATransaction(newTransaction.id);
+
+      assert.isObject(transaction, 'transaction should be an object');
+      assert.hasAnyKeys(transaction, ['id', 'amount', 'createdDate', 'status'], 'Object should have all the specified keys');
+    });
+  });
 });
