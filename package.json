@@ -4,6 +4,7 @@
   "description": "Banka is a light-weight core banking application that powers banking operations like account",
   "main": "app.js",
   "scripts": {
+    "lint": "./node_modules/.bin/eslint app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
