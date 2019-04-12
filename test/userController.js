@@ -176,7 +176,7 @@ describe("User Controllers", () => {
     describe("POST/auth/login", () => {
         it("Should login user", (done) => {
             chai.request(server)
-            .post('/api/v1/users/auth/login')
+            .post('/api/v1/auth/login')
             .send({
                 "email": "mike@gmail.com",
                 "password": "password"
@@ -194,7 +194,7 @@ describe("User Controllers", () => {
 
         it("Should login user", (done) => {
             chai.request(server)
-            .post('/api/v1/users/auth/login')
+            .post('/api/v1/auth/login')
             .send({
                 "email": "",
                 "password": "password"
@@ -208,7 +208,7 @@ describe("User Controllers", () => {
 
         it("Should login user", (done) => {
             chai.request(server)
-            .post('/api/v1/users/auth/login')
+            .post('/api/v1/auth/login')
             .send({
                 "email": "dsaaas",
                 "password": "password"
@@ -223,7 +223,7 @@ describe("User Controllers", () => {
 
         it("Should login user", (done) => {
             chai.request(server)
-            .post('/api/v1/users/auth/login')
+            .post('/api/v1/auth/login')
             .send({
                 "email": "mike@gmail.com",
                 "password": ""
@@ -240,7 +240,7 @@ describe("User Controllers", () => {
     describe("GET/ Should get all users", () =>{
         it("Should return an array of users", () => {
             chai.request(server)
-            .get('/api/v1/users')
+            .get('/api/v1/auth')
             .end((err, res) => {
               
                 assert.equal(res.body.status, 200, "Status should be 200");
@@ -249,5 +249,34 @@ describe("User Controllers", () => {
             })
         });
     });
+
+
+    describe("GET/me Should get a specific user", () => {
+        it("Should return a specific user", () => {
+            chai.request(server)
+            .get('/api/v1/auth/auth/me')
+            .set("x-access-token", token)
+            .end((err, res) => {
+                
+                assert.isObject(res.body, "Response body should be an object");
+                assert.equal(res.body.status, 200, "Status should be 200");
+                assert.hasAnyDeepKeys(res.body.data, ["id", "firstName", "lastName","email"]);
+            })
+        });
+
+        it("Should return an error message for invalid token", () => {
+            chai.request(server)
+            .get('/api/v1/auth/auth/me')
+            .set("x-access-token", "abc")
+            .end((err, res) => {
+              
+                assert.isObject(res.body, "Response body should be an object");
+                assert.equal(res.body.status, 400, "Status should be 400");
+                assert.isString(res.body.error, "Error message should be string");
+            })
+        })
+        
+    });
+
 
 });
