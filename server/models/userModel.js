@@ -69,6 +69,17 @@ class User {
     if(!user){ return null };
     return user
   }
+
+  async updateUser(email, newPassword) {
+    const user = this.getAUser(email);
+    if(!user){ return null }
+    const index = this.usersDb.indexOf(user);
+    if(!newPassword){ return null }
+    const hashedPassword = await hashPassword(newPassword);
+    user.password = hashedPassword;
+    user.updatedDate = moment();
+    return this.usersDb[index];
+  }
 }
 
 export default new User();
