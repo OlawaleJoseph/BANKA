@@ -34,7 +34,7 @@ describe("User Controllers", () => {
         this.timeout(10000);
         it("Should create new user", (done) => {
             chai.request(server)
-            .post('/api/v1/users/auth/signup')
+            .post('/api/v1/auth/signup')
             .send({
                 firstName: "John",
                 lastName: "Doe",
@@ -55,7 +55,7 @@ describe("User Controllers", () => {
 
         it("Should return status of 400", (done) => {
             chai.request(server)
-            .post('/api/v1/users/auth/signup')
+            .post('/api/v1/auth/signup')
             .send({
                 firstName: "",
                 lastName: "Doe",
@@ -74,7 +74,7 @@ describe("User Controllers", () => {
 
         it("Should return status of 400", (done) => {
             chai.request(server)
-            .post('/api/v1/users/auth/signup')
+            .post('/api/v1/auth/signup')
             .send({
                 firstName: "John",
                 lastName: "",
@@ -93,7 +93,7 @@ describe("User Controllers", () => {
 
         it("Should return status of 400", (done) => {
             chai.request(server)
-            .post('/api/v1/users/auth/signup')
+            .post('/api/v1/auth/signup')
             .send({
                 firstName: "John",
                 lastName: "Doe",
@@ -112,7 +112,7 @@ describe("User Controllers", () => {
 
         it("Should return status of 400", (done) => {
             chai.request(server)
-            .post('/api/v1/users/auth/signup')
+            .post('/api/v1/auth/signup')
             .send({
                 firstName: "John",
                 lastName: "Doe",
@@ -131,7 +131,7 @@ describe("User Controllers", () => {
 
         it("Should return status of 400", (done) => {
             chai.request(server)
-            .post('/api/v1/users/auth/signup')
+            .post('/api/v1/auth/signup')
             .send({
                 firstName: "John",
                 lastName: "Doe",
@@ -143,6 +143,30 @@ describe("User Controllers", () => {
                 
                 assert.equal(res.body.status, 400, "Response status should be 400");
                 
+
+                done()
+            })
+        });
+    });
+
+
+    describe("POST /api/auth/signupStaff", function () {
+        this.timeout(10000);
+        it("Should create new Staff user", (done) => {
+            chai.request(server)
+            .post('/api/v1/auth/signupStaff')
+            .send({
+                firstName: "Seun",
+                lastName: "Oke",
+                email: "bankaadcadmin@gmail.com",
+                password: "password123",
+                isAdmin: true
+            })
+            .end((err, res) => {
+                
+                assert.equal(res.body.status, 201, "Response status should be 201");
+                assert.equal(res.body.data.type, "staff","Response body should have type of staff")
+                assert.isObject(res.body.data, "Data should be an object");
 
                 done()
             })
