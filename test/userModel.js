@@ -1,6 +1,6 @@
 import chai from 'chai';
 import moment from 'moment';
-import userModel from '../models/users';
+import userModel from '../server/models/userModel';
 
 const { assert } = chai;
 
@@ -114,7 +114,7 @@ describe('Users Model', () => {
     });
 
     it('Should call the generateRandomPasssword()', () => {
-      assert.call(userModel.resetPassword, userModel.generateRandompassword, 'ResetPassword should call the generateRandomPassword function');
+      assert.call(userModel.resetPassword, userModel.generateRandomPassword, 'ResetPassword should call the generateRandomPassword function');
     });
 
     it('Should call updateUser()', () => {
@@ -338,7 +338,7 @@ describe('Users Model', () => {
 
   describe('generateRanmdomPassword()', () => {
     it('should return String', () => {
-      const password = userModel.generateRandompassword();
+      const password = userModel.generateRandomPassword();
 
       assert.isString(password, 'password should be string');
     });
