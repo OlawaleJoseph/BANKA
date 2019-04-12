@@ -80,6 +80,14 @@ class User {
     user.updatedDate = moment();
     return this.usersDb[index];
   }
+
+  deleteUser(id) {
+    if(!id){ return null}
+    const user = this.usersDb.find((client) => client.id == id);
+    if(!user){ return null}
+    const index = this.usersDb.indexOf(user);
+    return this.usersDb.splice(index, 1);
+  }
 }
 
 export default new User();
