@@ -59,6 +59,12 @@ class User {
     return null
     
   }
+
+  getAUser(email) {
+    const user = this.usersDb.find(user => user.email == email);
+    if(!user){ return null };
+    return user
+  }
 }
 
 export default new User();
