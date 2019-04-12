@@ -173,4 +173,68 @@ describe("User Controllers", () => {
         });
     });
 
+    describe("POST/auth/login", () => {
+        it("Should login user", (done) => {
+            chai.request(server)
+            .post('/api/v1/users/auth/login')
+            .send({
+                "email": "mike@gmail.com",
+                "password": "password"
+            })
+            .end((err, res) => {
+                
+                assert.equal(res.body.status, 200, "Response status should be 200");
+                assert.hasAllKeys(res.body, ["status", "data"],"Response body should have status and data keys")
+                assert.isObject(res.body.data, "Data should be an object");
+                assert.hasAllKeys(res.body.data, ["token", "id", "firstName", "lastName", "email"]);
+
+                done()
+            })
+        });
+
+        it("Should login user", (done) => {
+            chai.request(server)
+            .post('/api/v1/users/auth/login')
+            .send({
+                "email": "",
+                "password": "password"
+            })
+            .end((err, res) => {
+                
+                assert.equal(res.body.status, 400, "Response status should be 400");
+                done()
+            })
+        });
+
+        it("Should login user", (done) => {
+            chai.request(server)
+            .post('/api/v1/users/auth/login')
+            .send({
+                "email": "dsaaas",
+                "password": "password"
+            })
+            .end((err, res) => {
+                
+                assert.equal(res.body.status, 400, "Response status should be 400");
+                done()
+            })
+        });
+
+
+        it("Should login user", (done) => {
+            chai.request(server)
+            .post('/api/v1/users/auth/login')
+            .send({
+                "email": "mike@gmail.com",
+                "password": ""
+            })
+            .end((err, res) => {
+                
+                assert.equal(res.body.status, 400, "Response status should be 400");
+                done()
+            })
+        });
+
+    });
+
 });
