@@ -71,6 +71,15 @@ class User{
       })
     }
   };
+
+  getOne(req, res){
+    const user = userModel.getAUser(req.user.email);
+    if (!user) { return res.status(400).send('Invalid Request')}
+    res.status(200).json({
+        "status": 200,
+        "data": user
+    })
+    };
 };
 
 export default new User();
