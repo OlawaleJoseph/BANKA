@@ -254,7 +254,7 @@ describe("User Controllers", () => {
     describe("GET/me Should get a specific user", () => {
         it("Should return a specific user", () => {
             chai.request(server)
-            .get('/api/v1/auth/auth/me')
+            .get('/api/v1/auth/me')
             .set("x-access-token", token)
             .end((err, res) => {
                 
@@ -266,7 +266,7 @@ describe("User Controllers", () => {
 
         it("Should return an error message for invalid token", () => {
             chai.request(server)
-            .get('/api/v1/auth/auth/me')
+            .get('/api/v1/auth/me')
             .set("x-access-token", "abc")
             .end((err, res) => {
               
