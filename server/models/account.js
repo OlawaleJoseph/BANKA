@@ -48,5 +48,9 @@ class Account {
     if (!account) { return null; }
     return account;
   }
+
+  getAllAccounts() {
+    return this.accountsDb;
+  }
 }
 export default new Account();
