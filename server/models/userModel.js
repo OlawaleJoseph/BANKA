@@ -103,6 +103,13 @@ class User {
     return details;
     
   }
+
+  async generateToken(email){
+    const user = this.getAUser(email)
+    if(!user){ return null}
+    const token = await jsonwebtoken.sign(user, process.env.SECRET);
+      return token;
+  }
 }
 
 export default new User();
