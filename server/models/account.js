@@ -52,5 +52,15 @@ class Account {
   getAllAccounts() {
     return this.accountsDb;
   }
+
+  updateAccount(number, status) {
+    if (!number) { return null; }
+    const account = this.getAccount(number);
+    if (!account) { return null; }
+    const index = this.accountsDb.indexOf(account);
+    account.status = status;
+    account.modifiedDate = moment();
+    return this.accountsDb[index];
+  }
 }
 export default new Account();
