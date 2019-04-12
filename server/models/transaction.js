@@ -26,6 +26,10 @@ class Transaction {
   getATransaction(id) {
     return this.transactionDb.find(transaction => transaction.id === id);
   }
+
+  getAllTransactions() {
+    return this.transactionsDb;
+  }
 }
 
 export default new Transaction();
