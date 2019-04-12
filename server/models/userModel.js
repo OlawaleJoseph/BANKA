@@ -7,31 +7,49 @@ import hashPassword from '../helperFunctions/hashPassword';
 dotenv.config();
 
 class User {
-    constructor() {
-      this.usersDb = [];
-    }
+  constructor() {
+    this.usersDb = [];
+  }
 
-    async createUser(obj) {
-        const {
-          firstName, lastName, email, password, type
-        } = obj;
-        const hashedPassword = await hashPassword(password)
-          const newUser = {
-            id: this.usersDb.length + 1,
-            firstName,
-            lastName,
-            email,
-            password: hashedPassword,
-            type,
-            createdDate: moment(),
-          };
-          if(newUser.type == "staff"){
-            newUser.isAdmin = obj.isAdmin;
-          }
-          this.usersDb.push(newUser);
-          return newUser;
-        
-      }
+  async createUser(obj) {
+    const {
+      firstName, lastName, email, password, type,
+    } = obj;
+    const hashedPassword = await hashPassword(password);
+    const newUser = {
+      id: this.usersDb.length + 1,
+      firstName,
+      lastName,
+      email,
+      password: hashedPassword,
+      type,
+      createdDate: moment(),
+    };
+    if (newUser.type == 'staff') {
+      newUser.isAdmin = obj.isAdmin;
+    }
+    this.usersDb.push(newUser);
+    return newUser;
+  }
+
+  async createStaff(obj) {
+    const {
+      firstName, lastName, email, password,
+    } = obj;
+    const hashedPassword = await hashPassword(password);
+    const newUser = {
+      id: this.usersDb.length + 1,
+      firstName,
+      lastName,
+      email,
+      password: hashedPassword,
+      type: 'staff',
+      isAdmin: obj.isAdmin,
+      createdDate: moment(),
+    };
+    this.usersDb.push(newUser);
+    return newUser;
+  }
 }
 
 export default new User();
