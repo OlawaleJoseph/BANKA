@@ -23,7 +23,7 @@ class Account {
       return null;
     }
     const accountNumber = this.generateAccountNumber();
-    if (parseFloat(amount, 10) === 0) {
+    if (parseFloat(amount) === 0) {
       status = 'draft';
     } else {
       status = 'active';
@@ -40,6 +40,13 @@ class Account {
 
     this.accountsDb.push(newAccount);
     return newAccount;
+  }
+
+  getAccount(number) {
+    if (!number) { return null; }
+    const account = this.accountsDb.find(account => account.accountNumber === parseInt(number));
+    if (!account) { return null; }
+    return account;
   }
 }
 export default new Account();
