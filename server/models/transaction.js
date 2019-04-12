@@ -1,12 +1,27 @@
 import moment from 'moment';
 
 class Transaction {
-    constructor() {
-      this.transactionDb = [];
-    }
-  
-  
+  constructor() {
+    this.transactionDb = [];
   }
-  
-  export default new Transaction();
-  
+
+  createTransaction(transactionDetails) {
+    const { amount } = transactionDetails;
+
+    try {
+      const newTransaction = {
+        id: this.transactionDb.length + 1,
+        amount: parseFloat(amount),
+        createdOn: moment(),
+      };
+
+
+      this.transactionDb.push(newTransaction);
+      return newTransaction;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}
+
+export default new Transaction();
