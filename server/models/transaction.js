@@ -30,6 +30,12 @@ class Transaction {
   getAllTransactions() {
     return this.transactionsDb;
   }
+
+  deleteTransaction(id) {
+    const transaction = this.getAtransaction(id);
+    const index = this.transactionsDb.indexOf(transaction);
+    return this.transactionsDb.splice(index, 1);
+  }
 }
 
 export default new Transaction();
