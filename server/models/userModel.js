@@ -11,6 +11,27 @@ class User {
       this.usersDb = [];
     }
 
+    async createUser(obj) {
+        const {
+          firstName, lastName, email, password, type
+        } = obj;
+        const hashedPassword = await hashPassword(password)
+          const newUser = {
+            id: this.usersDb.length + 1,
+            firstName,
+            lastName,
+            email,
+            password: hashedPassword,
+            type,
+            createdDate: moment(),
+          };
+          if(newUser.type == "staff"){
+            newUser.isAdmin = obj.isAdmin;
+          }
+          this.usersDb.push(newUser);
+          return newUser;
+        
+      }
 }
 
 export default new User();
