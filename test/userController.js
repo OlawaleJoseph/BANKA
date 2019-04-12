@@ -241,7 +241,7 @@ describe("User Controllers", () => {
             .get('/api/v1/auth')
             .set("x-access-token", token)
             .end((err, res) => {
-                
+
                 assert.equal(res.body.status, 200, "Status should be 200");
                 assert.isArray(res.body.data, "Data should be an array")
                 
@@ -277,12 +277,14 @@ describe("User Controllers", () => {
         
     });
 
-    describe("PATCH/me Should get a specific user", () => {
+    describe.only("PATCH/me Should update a specific user", () => {
         it("Should update user's password", () => {
             chai.request(server)
             .patch('/api/v1/auth/me')
             .set("x-access-token", token)
+            .send({password: "newpassword"})
             .end((err, res) => {
+                console.log(res.body, "Updated")
                 assert.isObject(res.body, "Response body should be an object");
                 assert.equal(res.body.status, 200, "Status should be 200");
                 assert.isString(res.body.message, "message should be string")
@@ -293,8 +295,9 @@ describe("User Controllers", () => {
             chai.request(server)
             .patch('/api/v1/auth/me')
             .set("x-access-token", "abc")
+            .send({password: "newpassword"})
             .end((err, res) => {
-             
+                console.log(res.body, "Error")
                 assert.isObject(res.body, "Response body should be an object");
                 assert.equal(res.body.status, 400, "Status should be 400");
                 assert.isString(res.body.error, "Error message should be string");

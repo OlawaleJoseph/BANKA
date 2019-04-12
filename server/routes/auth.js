@@ -16,6 +16,8 @@ router.get('/me',validateToken, user.getOne);
 
 router.get('/', validateToken, user.getAll);
 
+router.patch('/me', validateToken, user.update);
+
 
 
 export default router

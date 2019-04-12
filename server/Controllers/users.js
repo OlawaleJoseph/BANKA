@@ -96,6 +96,21 @@ class User{
         }
         
     };
+
+    async update(req, res){
+        const user = await userModel.updateUser(req.user.email, req.body.password);
+        if(user){
+          res.status(200).json({
+            "status": 200,
+            "message": "Password Changed Successfully"
+          });
+        }else{
+          res.status(500).json({
+            "status": 500,
+            "message": "Internal Server Error"
+          });
+        }
+    }
 };
 
 export default new User();
