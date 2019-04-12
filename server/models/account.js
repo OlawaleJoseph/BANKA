@@ -62,5 +62,13 @@ class Account {
     account.modifiedDate = moment();
     return this.accountsDb[index];
   }
+
+  deleteAccount(number) {
+    if (!number) { return null; }
+    const account = this.getAccount(number);
+    if (!account) { return undefined; }
+    const index = this.accountsDb.indexOf(account);
+    return this.accountsDb.splice(index, 1);
+  }
 }
 export default new Account();
