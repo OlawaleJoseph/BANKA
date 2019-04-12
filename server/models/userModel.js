@@ -110,6 +110,19 @@ class User {
     const token = await jsonwebtoken.sign(user, process.env.SECRET);
       return token;
   }
+
+  decodeToken(token){
+    if(!token){ return null}
+    try{
+      const decodedToken = jsonwebtoken.verify(token, process.env.SECRET);
+    if(decodedToken){ return  decodedToken};
+    }catch(err){
+      console.log(err)
+      return undefined
+    }
+    
+    
+  }
 }
 
 export default new User();
