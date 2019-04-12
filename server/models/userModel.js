@@ -60,6 +60,10 @@ class User {
     
   }
 
+  getAllUsers() {
+    return this.usersDb;
+  }
+
   getAUser(email) {
     const user = this.usersDb.find(user => user.email == email);
     if(!user){ return null };
