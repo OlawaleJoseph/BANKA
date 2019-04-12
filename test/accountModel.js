@@ -1,5 +1,5 @@
 import chai from 'chai';
-import accountModel from '../models/account';
+import accountModel from '../server/models/account';
 
 const { assert } = chai;
 
