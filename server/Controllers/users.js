@@ -50,6 +50,27 @@ class User{
     }
     
   };
+
+  async login(req, res){
+    const user = await userModel.login(req.body.email, req.body.password);
+    if(!user){ return res.status(400).json({
+      "status": 400,
+      "error": "Invalid email or password"
+      })
+    }else{
+      const token = await userModel.generateToken(user.email);
+      res.status(200).json({
+        "status": 200,
+        "data": {
+          token,
+          "id": user.id,
+          "firstName": user.firstName,
+          "lastName": user.lastName,
+          "email": user.email
+        }
+      })
+    }
+  };
 };
 
 export default new User();

@@ -181,7 +181,6 @@ describe("User Controllers", () => {
                 "password": "password"
             })
             .end((err, res) => {
-                
                 assert.equal(res.body.status, 200, "Response status should be 200");
                 assert.hasAllKeys(res.body, ["status", "data"],"Response body should have status and data keys")
                 assert.isObject(res.body.data, "Data should be an object");

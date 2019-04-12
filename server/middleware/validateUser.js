@@ -1,4 +1,7 @@
 import userModel from '../models/userModel';
+import jsonwebtoken from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const validateSignUp = (req, res, next) => {
     if(!req.body.firstName || /[^a-zA-z]/.test(req.body.firstName)){ 
@@ -156,4 +159,25 @@ export const verifyAdmin = async (req, res, next) => {
             
     }
     
+}
+
+export  const validateLogin = (req, res, next)=>{
+    const email = req.body.email;
+    const password = req.body.password;
+    const emailRegex = /^[a-z0-9\+\-_\.]+@[a-z\d\-.]+\.[a-z]+$/i;
+    if(!email || !emailRegex.test(email)){ 
+            return res.status(400).json({
+            "status": 400,
+            "error": "Invalid Email"
+        })
+    }else if(!password){
+            return res.status(400).json({
+            "status": 400,
+            "error": "Password required"
+        })
+    }
+    else{
+        next();
+    }
+
 }
