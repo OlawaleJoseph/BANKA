@@ -281,7 +281,7 @@ describe("User Controllers", () => {
     describe("PATCH/me Should get a specific user", () => {
         it("Should update user's password", () => {
             chai.request(server)
-            .patch('/api/v1/users/auth/me')
+            .patch('/api/v1/auth/me')
             .set("x-access-token", token)
             .end((err, res) => {
                 assert.isObject(res.body, "Response body should be an object");
@@ -292,7 +292,7 @@ describe("User Controllers", () => {
 
         it("Should return an error message for invalid token", () => {
             chai.request(server)
-            .patch('/api/v1/users/auth/me')
+            .patch('/api/v1/auth/me')
             .set("x-access-token", "abc")
             .end((err, res) => {
              
@@ -308,7 +308,7 @@ describe("User Controllers", () => {
         
         it("Should have status of 200", () => {
             chai.request(server)
-            .delete('/api/v1/users/auth/' + user.id)
+            .delete('/api/v1/auth/' + user.id)
             .set("x-access-token", token)
             .end((err, res) => {
 
@@ -320,7 +320,7 @@ describe("User Controllers", () => {
 
         it("Should have status of 400 for invalid id", () => {
             chai.request(server)
-            .delete('/api/v1/users/auth/' + 0)
+            .delete('/api/v1/auth/' + 0)
             .set("x-access-token", token)
             .end((err, res) => {
 
@@ -331,6 +331,40 @@ describe("User Controllers", () => {
         });
 
         
+    });
+
+    describe("POST/auth/reset", function (){
+        this.timeout(10000);
+        it("Should reset user  password", (done) => {
+            chai.request(server)
+            .put('/api/v1/auth/reset')
+            .send({
+                "email": "mike@gmail.com",
+            })
+            .end((err, res) => {
+                
+                assert.equal(res.body.status, 200, "Response status should be 200");
+                assert.hasAllKeys(res.body, ["status", "message"],"Response body should have status and data keys")
+                assert.isString(res.body.message, "Data should be a string");
+               
+                done()
+            })
+        });
+
+        it("Should have a 400 status", (done) => {
+            chai.request(server)
+            .post('/api/v1/auth/reset')
+            .send({"email": "abcde@gmail.com"})
+            .end((err, res) => {
+                
+                
+                assert.equal(res.body.status, 400, "Response status should be 400");
+                assert.hasAllKeys(res.body, ["status", "error"],"Response body should have status and error")
+                assert.isString(res.body.error, "Error should be string");
+
+                done()
+            })
+        });
     });
 
 
