@@ -5,8 +5,7 @@ class Transaction {
     this.transactionDb = [];
   }
 
-  createTransaction(transactionDetails) {
-    const { amount } = transactionDetails;
+  createTransaction(amount) {
 
     try {
       const newTransaction = {
@@ -24,17 +23,21 @@ class Transaction {
   }
 
   getATransaction(id) {
-    return this.transactionDb.find(transaction => transaction.id === id);
+    const foundID = this.transactionDb.find(transaction => transaction.id === id);
+    if(foundID){ return foundID
+    }else{
+        return null
+    }
   }
 
   getAllTransactions() {
-    return this.transactionsDb;
+    return this.transactionDb;
   }
 
   deleteTransaction(id) {
-    const transaction = this.getAtransaction(id);
-    const index = this.transactionsDb.indexOf(transaction);
-    return this.transactionsDb.splice(index, 1);
+    const transaction = this.getATransaction(id);
+    const index = this.transactionDb.indexOf(transaction);
+    return this.transactionDb.splice(index, 1);
   }
 }
 

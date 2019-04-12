@@ -1,5 +1,5 @@
 import chai from 'chai';
-import transactionModel from '../models/transaction';
+import transactionModel from '../server/models/transaction';
 
 const { assert } = chai;
 
@@ -12,12 +12,12 @@ describe('Transaction Model', () => {
 
     it('The transaction Object should contain keys id, createdOn, amount', () => {
       const transaction = transactionModel.createTransaction('300000');
-      assert.hasAllKeys(transaction, ['amount', 'createdOn', 'id', 'status'], 'Transaction should have keys id, amount and createdOn');
+      assert.hasAllKeys(transaction, ['amount', 'createdOn', 'id'], 'Transaction should have keys id, amount and createdOn');
     });
 
     it('It should save the transaction Object in the database', () => {
       const transaction = transactionModel.createTransaction('300000');
-      assert.include(transactionModel.transactionsDb, transaction, 'Transaction object should be saved in the database');
+      assert.include(transactionModel.transactionDb, transaction, 'Transaction object should be saved in the database');
     });
   });
 
@@ -37,7 +37,7 @@ describe('Transaction Model', () => {
       const transaction = transactionModel.getATransaction(newTransaction.id);
 
       assert.isObject(transaction, 'transaction should be an object');
-      assert.hasAnyKeys(transaction, ['id', 'amount', 'createdDate', 'status'], 'Object should have all the specified keys');
+      assert.hasAnyKeys(transaction, ['id', 'amount', 'createdDate'], 'Object should have all the specified keys');
     });
   });
 
@@ -45,7 +45,6 @@ describe('Transaction Model', () => {
     it('Should return an array', () => {
       transactionModel.createTransaction('20000.89');
       const transactions = transactionModel.getAllTransactions();
-
       assert.isArray(transactions, 'transactions should be an array');
     });
   });
