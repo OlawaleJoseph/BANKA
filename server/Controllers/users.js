@@ -79,6 +79,22 @@ class User{
         "status": 200,
         "data": user
     })
+  };
+
+    getAll (req, res){
+        if(req.user.type == "staff"){
+          const users = userModel.getAllUsers();
+      res.status(200).json({
+        "status": 200,
+        "data": users
+      });
+        }else{
+          res.status(403).json({
+            "status": 403,
+            "error": "You do not have the access to view this page"
+          })
+        }
+        
     };
 };
 

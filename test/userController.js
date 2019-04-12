@@ -239,8 +239,9 @@ describe("User Controllers", () => {
         it("Should return an array of users", () => {
             chai.request(server)
             .get('/api/v1/auth')
+            .set("x-access-token", token)
             .end((err, res) => {
-              
+                
                 assert.equal(res.body.status, 200, "Status should be 200");
                 assert.isArray(res.body.data, "Data should be an array")
                 
@@ -255,7 +256,7 @@ describe("User Controllers", () => {
             .get('/api/v1/auth/me')
             .set("x-access-token", token)
             .end((err, res) => {
-                
+
                 assert.isObject(res.body, "Response body should be an object");
                 assert.equal(res.body.status, 200, "Status should be 200");
                 assert.hasAnyDeepKeys(res.body.data, ["id", "firstName", "lastName","email"]);

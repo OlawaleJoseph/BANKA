@@ -14,6 +14,8 @@ router.post('/login', validateLogin, user.login);
 
 router.get('/me',validateToken, user.getOne);
 
+router.get('/', validateToken, user.getAll);
+
 
 
 export default router
