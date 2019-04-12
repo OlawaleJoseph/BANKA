@@ -88,6 +88,11 @@ class User {
     const index = this.usersDb.indexOf(user);
     return this.usersDb.splice(index, 1);
   }
+
+  generateRandomPassword(){
+    const char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
+    return Array(8).fill(char).map(arr => arr[Math.floor(Math.random() * arr.length)]).join("");
+  }
 }
 
 export default new User();
