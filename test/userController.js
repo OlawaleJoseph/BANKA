@@ -163,7 +163,6 @@ describe("User Controllers", () => {
                 isAdmin: true
             })
             .end((err, res) => {
-                
                 assert.equal(res.body.status, 201, "Response status should be 201");
                 assert.equal(res.body.data.type, "staff","Response body should have type of staff")
                 assert.isObject(res.body.data, "Data should be an object");
