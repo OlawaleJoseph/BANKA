@@ -237,4 +237,17 @@ describe("User Controllers", () => {
 
     });
 
+    describe("GET/ Should get all users", () =>{
+        it("Should return an array of users", () => {
+            chai.request(server)
+            .get('/api/v1/users')
+            .end((err, res) => {
+              
+                assert.equal(res.body.status, 200, "Status should be 200");
+                assert.isArray(res.body.data, "Data should be an array")
+                
+            })
+        });
+    });
+
 });
