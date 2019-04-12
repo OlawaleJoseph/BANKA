@@ -304,5 +304,35 @@ describe("User Controllers", () => {
         
     });
 
+    describe("DELETE/:ID to delete a user", () => {
+        
+        it("Should have status of 200", () => {
+            chai.request(server)
+            .delete('/api/v1/users/auth/' + user.id)
+            .set("x-access-token", token)
+            .end((err, res) => {
+
+                assert.isNotEmpty(res.body, "res.body shouldn't be empty");
+                assert.equal(res.body.status, 200, "Status should be 200");
+                assert.isString(res.body.message, "message property should be string");
+            });
+        });
+
+        it("Should have status of 400 for invalid id", () => {
+            chai.request(server)
+            .delete('/api/v1/users/auth/' + 0)
+            .set("x-access-token", token)
+            .end((err, res) => {
+
+                assert.isNotEmpty(res.body, "res.body shouldn't be empty");
+                assert.equal(res.body.status, 400, "Status should be 400");
+                assert.isString(res.body.error, "message property should be string");
+            });
+        });
+
+        
+    });
+
+
 
 });
