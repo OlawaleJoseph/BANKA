@@ -22,6 +22,10 @@ class Transaction {
       console.log(err);
     }
   }
+
+  getATransaction(id) {
+    return this.transactionDb.find(transaction => transaction.id === id);
+  }
 }
 
 export default new Transaction();
