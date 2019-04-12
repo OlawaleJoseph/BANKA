@@ -50,6 +50,15 @@ class User {
     this.usersDb.push(newUser);
     return newUser;
   }
+
+  async login(email, password){
+    const user = this.usersDb.find(client => client.email == email);
+    if(!user){ return null }
+    const verifyPassword = await bcrypt.compare(password, user.password);
+    if(verifyPassword){  return user }
+    return null
+    
+  }
 }
 
 export default new User();
