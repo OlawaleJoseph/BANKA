@@ -278,5 +278,31 @@ describe("User Controllers", () => {
         
     });
 
+    describe("PATCH/me Should get a specific user", () => {
+        it("Should update user's password", () => {
+            chai.request(server)
+            .patch('/api/v1/users/auth/me')
+            .set("x-access-token", token)
+            .end((err, res) => {
+                assert.isObject(res.body, "Response body should be an object");
+                assert.equal(res.body.status, 200, "Status should be 200");
+                assert.isString(res.body.message, "message should be string")
+            })
+        });
+
+        it("Should return an error message for invalid token", () => {
+            chai.request(server)
+            .patch('/api/v1/users/auth/me')
+            .set("x-access-token", "abc")
+            .end((err, res) => {
+             
+                assert.isObject(res.body, "Response body should be an object");
+                assert.equal(res.body.status, 400, "Status should be 400");
+                assert.isString(res.body.error, "Error message should be string");
+            })
+        })
+        
+    });
+
 
 });
