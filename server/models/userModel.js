@@ -93,6 +93,16 @@ class User {
     const char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
     return Array(8).fill(char).map(arr => arr[Math.floor(Math.random() * arr.length)]).join("");
   }
+
+  async resetPassword(email){
+    const user = this.getAUser(email);
+    if(!user){ return null}
+    const randomPassword = this.generateRandomPassword();
+    const updatedUser = await this.updateUser(user.email, randomPassword);
+    const details = {randomPassword, updatedUser}
+    return details;
+    
+  }
 }
 
 export default new User();
