@@ -13,6 +13,8 @@ router.get('/:accountNumber', viewMyAccount, Account.getOne);
 
 router.patch('/:accountNumber', [verifyAdmin, updateStatus], Account.update);
 
+router.delete('/:accountNumber', verifyAdmin, Account.deleteAccount);
+
 
 
 

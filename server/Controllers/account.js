@@ -58,6 +58,19 @@ class Account {
     }
    
   };
+
+  deleteAccount(req, res){
+    const account = accountModel.deleteAccount(req.params.accountNumber);
+    if(!account){ return res.status(203).json({
+      "status": 400,
+      "message": "Invalid Account"
+    })}
+  
+    res.status(200).json({
+      "status": 203,
+      "message": "Account successfully deleted"
+    });
+  };
 }
 
 
