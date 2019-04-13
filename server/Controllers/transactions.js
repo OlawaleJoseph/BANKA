@@ -65,7 +65,7 @@ class Transaction {
             const transactionList = transactionModel.transactionDb.filter((trans) => parseInt(trans.accountNumber) === account.accountNumber);
             if(!transactionList){
                 return res.status(204).json({
-                    "status": 400,
+                    "status": 204,
                     "error": "User has no transaction"
                 });
             }else{
@@ -84,6 +84,48 @@ class Transaction {
         }
         
     };
+
+    getOne(req, res) {
+        
+        if(req.user.type.toLowerCase() === "client"){
+            const account = accountModel.accountsDb.find((account) => account.owner === req.user.id);
+            if(!account){
+               return res.status(400).json({
+                    "status": 400,
+                    "error": "User has no account"
+                });
+            };
+            const id = parseInt(req.params.id, 10)
+            const singleTransaction = transactionModel.getATransaction(id)
+            if(!singleTransaction){
+                return res.status(404).json({
+                    "status": 404,
+                    "error": `User has no transaction with the id ${id}`
+                });
+            }else{
+                if(parseInt(singleTransaction.accountNumber, 10) === account.accountNumber){
+                    return res.status(200).json({
+                        "status": 200,
+                        "data": singleTransaction
+                    })
+                }else{
+                    return res.status(404).json({
+                        "status": 404,
+                        "error": `User has no transaction with the id ${id}`
+                    });
+                }
+                
+            }
+
+        }else{
+            const foundTransaction = transactionModel.getATransaction(req.params.id)
+            return res.status(200).json({
+                "status": 200,
+                "data": foundTransaction
+            })
+        }
+        
+    }
 }
 
 export default new Transaction();
