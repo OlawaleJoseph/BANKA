@@ -13,8 +13,6 @@ class Transaction {
         amount: parseFloat(amount),
         createdOn: moment(),
       };
-
-
       this.transactionDb.push(newTransaction);
       return newTransaction;
     } catch (err) {
