@@ -1,16 +1,17 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../app';
-import accountModel from '../models/account';
-import userModel from '../models/users';
+import server from '../server/app';
+import accountModel from '../server/models/account';
+import userModel from '../server/models/userModel';
 
 const assert = chai.assert;
 
 chai.use(chaiHttp);
 
 describe("Account Controller", () => {
-    let token;
-    let user, cashier, admin
+    let token, cashierToken, adminToken;
+    let user, cashier, admin;
+    let account;
     beforeEach( async () =>{
         userModel.usersDb = [];
         accountModel.accountsDb = [];
@@ -101,7 +102,7 @@ describe("Account Controller", () => {
             .get('/api/v1/accounts')
             .set('x-access-token', adminToken)
             .end((err, res) => {
-               
+               consolelog(res.body)
                 assert.equal(res.body.status, 200, "Status should be 200");
                 assert.isArray(res.body.data, "Data should be an array")
             })
