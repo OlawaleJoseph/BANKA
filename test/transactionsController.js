@@ -75,6 +75,23 @@ describe.only("TRANSACTION CONTROLLER", () => {
                 assert.equal(res.body.status, 201, "Status should be 201")
             })
         });
-    })
+    });
 
+    describe("POST/ should create DEBIT transaction", () => {
+        it("Should create a Debit transaction and return a status of 201", () => {
+            chai.request(server)
+            .post(`/api/v1/transactions/${account.accountNumber}/debit`)
+            .set("x-access-token", cashierToken)
+            .send({amount: 73482.35})
+            .end((err, res) => {
+                
+                
+                
+                assert.isObject(res.body, "res.body should be an object");
+                assert.hasAllKeys(res.body.data, ["transactionId", "type", "accountNumber", "cashier", "amount", "balance"]);
+                assert.equal(res.body.status, 201, "Status should be 201")
+            })
+        });
+    });
+    
 });
