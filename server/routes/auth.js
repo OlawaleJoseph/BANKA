@@ -20,6 +20,8 @@ router.patch('/me', validateToken, user.update);
 
 router.patch('/reset', user.passwordReset);
 
+router.delete('/:id', validateToken, user.deleteUser);
+
 
 
 export default router

@@ -306,23 +306,22 @@ describe("User Controllers", () => {
         
     });
 
-    describe("DELETE/:ID to delete a user", () => {
+    describe.only("DELETE/:ID to delete a user", () => {
         
-        it("Should have status of 200", () => {
+        it("Should have status of 203", () => {
             chai.request(server)
             .delete('/api/v1/auth/' + user.id)
             .set("x-access-token", token)
             .end((err, res) => {
-
                 assert.isNotEmpty(res.body, "res.body shouldn't be empty");
-                assert.equal(res.body.status, 200, "Status should be 200");
+                assert.equal(res.body.status, 203, "Status should be 200");
                 assert.isString(res.body.message, "message property should be string");
             });
         });
 
         it("Should have status of 400 for invalid id", () => {
             chai.request(server)
-            .delete('/api/v1/auth/' + 0)
+            .delete('/api/v1/auth/' + 999)
             .set("x-access-token", token)
             .end((err, res) => {
 
@@ -335,7 +334,7 @@ describe("User Controllers", () => {
         
     });
 
-    describe.only("POST/auth/reset", function (){
+    describe("PATCH/auth/reset", function (){
         this.timeout(10000);
         it("Should reset user  password", (done) => {
             chai.request(server)

@@ -138,6 +138,30 @@ class User{
           }
         }
     };
+
+    deleteUser(req, res){
+        if(req.user.isAdmin){
+            const user = userModel.deleteUser(req.params.id);
+            if(user){
+                res.status(200).json({
+                    "status": 203,
+                    "message": "User deleted successfully"
+                })
+            }else{
+                res.status(400).json({
+                    "status": 400,
+                    "error": "Invalid User"
+                })
+            }
+        }else{
+            res.status(403).json({
+                "status": 403,
+                "error": "You do not have access to this page"
+            })
+        }
+        
+        
+    }
 };
 
 export default new User();
