@@ -94,4 +94,29 @@ describe("Account Controller", () => {
             })
         });
     });
+
+    describe("GET/ should return all accounts", () => {
+        it("Gets all accounts and has status of 200", () => {
+            chai.request(server)
+            .get('/api/v1/accounts')
+            .set('x-access-token', adminToken)
+            .end((err, res) => {
+               
+                assert.equal(res.body.status, 200, "Status should be 200");
+                assert.isArray(res.body.data, "Data should be an array")
+            })
+        
+        });
+
+        it("Should return status of 400", () => {
+            chai.request(server)
+            .get('/api/v1/accounts')
+            .set('x-access-token', token)
+            .end((err, res) => {
+                
+                assert.equal(res.body.status, 403, "Status should be 403");
+            });
+        
+        });
+    });
 });
