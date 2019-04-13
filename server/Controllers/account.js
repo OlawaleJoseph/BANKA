@@ -23,6 +23,14 @@ class Account {
     });
   };
 
+  getAll(req, res){
+    const accounts = accountModel.getAllAccounts();
+    res.json({
+      "status": 200,
+      "data": accounts
+    });
+  };
+
   
 }
 

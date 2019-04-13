@@ -11,3 +11,15 @@ export const noMultipleAccounts = (req, res, next) => {
         next()
     };
 };
+
+export const staffOnly = (req, res, next) => {
+    if(req.user.type.toLowerCase() == "staff"){
+        next();
+    }else{
+        return res.status(403).json({
+            "status": 403,
+            "error": "You don not have the access to see this page"
+        });
+    };
+};
+
