@@ -10,7 +10,7 @@ const assert = chai.assert;
 chai.use(chaiHttp);
 
 
-describe.only("TRANSACTION CONTROLLER", () => {
+describe("TRANSACTION CONTROLLER", () => {
     let cashierToken, customerToken, adminToken
     let cashier, customer, admin;
     let newTransaction, account;
@@ -113,9 +113,9 @@ describe.only("TRANSACTION CONTROLLER", () => {
             .get("/api/v1/transactions/")
             .set("x-access-token", adminToken)
             .end((err, res) => {
-                
-                assert.isArray(res.body)
+                assert.isObject(res.body)
                 assert.equal(res.body.status, 200);
+                assert.isArray(res.body.data, "Data should be an array of objects")
             })
         })
     ]);
@@ -128,7 +128,7 @@ describe.only("TRANSACTION CONTROLLER", () => {
             .end((err, res) => {
                
                 assert.isObject(res.body)
-                assert.equal(res.body.status, 200);
+                assert.equal(res.body.status, 203);
             })
         })
     ]);
