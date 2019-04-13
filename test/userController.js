@@ -277,7 +277,7 @@ describe("User Controllers", () => {
         
     });
 
-    describe.only("PATCH/me Should update a specific user", () => {
+    describe("PATCH/me Should update a specific user", () => {
         it("Should update user's password", () => {
             chai.request(server)
             .patch('/api/v1/auth/me')
@@ -335,16 +335,16 @@ describe("User Controllers", () => {
         
     });
 
-    describe("POST/auth/reset", function (){
+    describe.only("POST/auth/reset", function (){
         this.timeout(10000);
         it("Should reset user  password", (done) => {
             chai.request(server)
-            .put('/api/v1/auth/reset')
+            .patch('/api/v1/auth/reset')
             .send({
                 "email": "mike@gmail.com",
             })
             .end((err, res) => {
-                
+                console.log(res.body, "Body")
                 assert.equal(res.body.status, 200, "Response status should be 200");
                 assert.hasAllKeys(res.body, ["status", "message"],"Response body should have status and data keys")
                 assert.isString(res.body.message, "Data should be a string");
@@ -355,7 +355,7 @@ describe("User Controllers", () => {
 
         it("Should have a 400 status", (done) => {
             chai.request(server)
-            .post('/api/v1/auth/reset')
+            .patch('/api/v1/auth/reset')
             .send({"email": "abcde@gmail.com"})
             .end((err, res) => {
                 

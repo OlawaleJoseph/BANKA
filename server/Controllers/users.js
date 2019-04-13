@@ -111,6 +111,33 @@ class User{
           });
         }
     }
+
+    async passwordReset(req, res){
+        const udpdatedInfo = await userModel.resetPassword(req.body.email);
+        if(!udpdatedInfo){ return res.status(400).json({
+          "status": 400,
+          "error": "Invalid email"
+          })
+        }else{
+          const {updatedUser, randomPassword} = udpdatedInfo
+          const subject = "PASSWORD RESET SUCCESSFUL"
+          const message = `YOUR NEW PASSWORD IS ${randomPassword}.`
+          try{
+            await sendMail(req.body.email, subject, message);
+              res.status(200).json({
+                "status": 200,
+                "message": `Hi ${updatedUser.firstName} check your email for your new password `
+              })
+          }catch(err){
+            console.error(err);
+            res.status(500).status.json({
+              "status": 500, 
+              "error": "Internal Server Error"
+            
+            })
+          }
+        }
+    };
 };
 
 export default new User();

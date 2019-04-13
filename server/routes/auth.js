@@ -18,6 +18,8 @@ router.get('/', validateToken, user.getAll);
 
 router.patch('/me', validateToken, user.update);
 
+router.patch('/reset', user.passwordReset);
+
 
 
 export default router
