@@ -1,3 +1,10 @@
+[![Build Status](https://travis-ci.org/OlawaleJoseph/BANKA.svg?branch=develop)](https://travis-ci.org/OlawaleJoseph/BANKA)
+
+[![Coverage Status](https://coveralls.io/repos/github/OlawaleJoseph/BANKA/badge.svg?branch=ch-coveralls-read-me-165330079)](https://coveralls.io/github/OlawaleJoseph/BANKA?branch=ch-coveralls-read-me-165330079)
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/672a7f3b08498c237a1a/maintainability)](https://codeclimate.com/github/OlawaleJoseph/BANKA/maintainability)
+
+
 # BANKA
 Banka is a light-weight core banking application that powers banking operations like account
 creation, customer deposit and withdrawals. This app is meant to support a single bank, where
