@@ -93,5 +93,18 @@ describe.only("TRANSACTION CONTROLLER", () => {
             })
         });
     });
+
+    describe("GET/:id Should return a transaction with the given id", () => [
+        it("Should return status of 200 with the transaction object", () => {
+            chai.request(server)
+            .get(`/api/v1/transactions/${newTransaction.id}`)
+            .set("x-access-token", adminToken)
+            .end((err, res) => {
+                
+                assert.isObject(res.body)
+                assert.equal(res.body.status, 200);
+            })
+        })
+    ]);
     
 });
