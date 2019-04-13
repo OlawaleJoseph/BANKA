@@ -120,5 +120,18 @@ describe.only("TRANSACTION CONTROLLER", () => {
         })
     ]);
 
+    describe("DELETE/:id Should delete a transaction with the given id", () => [
+        it("Should return status of 200 ", () => {
+            chai.request(server)
+            .delete(`/api/v1/transactions/${newTransaction.id}`)
+            .set("x-access-token", adminToken)
+            .end((err, res) => {
+               
+                assert.isObject(res.body)
+                assert.equal(res.body.status, 200);
+            })
+        })
+    ]);
+
 
 });
