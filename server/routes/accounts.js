@@ -1,6 +1,6 @@
 import express from 'express';
 import Account from '../Controllers/account'
-import { noMultipleAccounts, staffOnly, viewMyAccount, updateStatus, verifyAdmin } from '../middleware/ValidateAccount';
+import { noMultipleAccounts, staffOnly, viewMyAccount, updateStatus, verifyAdmin } from '../middleware/validateAccount';
 
 
 const router = express.Router();
