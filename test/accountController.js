@@ -173,4 +173,29 @@ describe("Account Controller", () => {
             });
         });
     });
+
+    describe("DELETE/:accountNumber should delete account", () => {
+        it("Should have a status of 200", () => {
+            chai.request(server)
+            .delete('/api/v1/accounts/' + account.accountNumber)
+            .set('x-access-token', adminToken)
+            .end((err, res) => {
+                
+                assert.equal(res.body.status, 200, "Status should be 200");
+                assert.equal(res.body.message, "Account successfully deleted");
+                
+            });
+        });
+
+        it("Should have a status of 400", () => {
+            chai.request(server)
+            .delete('/api/v1/accounts/' + account.accountNumber)
+            .set('x-access-token', token)
+            .end((err, res) => {
+                
+                assert.equal(res.body.status, 403, "Status should be 400");
+                
+            });
+        });
+    });
 });
