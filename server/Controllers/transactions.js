@@ -51,7 +51,39 @@ class Transaction {
           "newBalance": transaction.newBalance,
         }
       })
-  };
+    };
+
+    getAll(req, res){
+        if(req.user.type.toLowerCase() === "client"){
+            const account = accountModel.accountsDb.find((account) => account.owner === req.user.id);
+            if(!account){
+               return res.status(400).json({
+                    "status": 400,
+                    "error": "User has no account"
+                });
+            };
+            const transactionList = transactionModel.transactionDb.filter((trans) => parseInt(trans.accountNumber) === account.accountNumber);
+            if(!transactionList){
+                return res.status(204).json({
+                    "status": 400,
+                    "error": "User has no transaction"
+                });
+            }else{
+                return res.status(200).json({
+                    "status": 200,
+                    "data": transactionList
+                })
+            }
+
+        }else{
+            const transactions = transactionModel.getAllTransactions();
+            return res.status(200).json({
+                "status": 200,
+                "data": transactions
+            })
+        }
+        
+    };
 }
 
 export default new Transaction();

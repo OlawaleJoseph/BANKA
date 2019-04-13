@@ -9,6 +9,8 @@ router.post('/:accountNumber/debit', validateCashier,  transaction.debit);
 
 router.post('/:accountNumber/credit', validateCashier,  transaction.credit);
 
+router.get('/', transaction.getAll)
+
 
 
 export default router;
