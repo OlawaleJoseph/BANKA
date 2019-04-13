@@ -42,6 +42,22 @@ class Account {
         "data": account
     })
   };
+
+  update(req, res){
+    const account = accountModel.updateAccount(req.params.accountNumber, req.body.status);
+    if(account){
+        res.status(200).json({
+            "status": 200,
+            "data": account
+        });
+    }else{
+        return res.status(400).json({
+            "status": 400,
+            "error": " Invalid account number"
+        });
+    }
+   
+  };
 }
 
 

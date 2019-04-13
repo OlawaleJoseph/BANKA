@@ -43,3 +43,25 @@ export const viewMyAccount = (req, res, next) => {
     };
     
 };
+
+export const updateStatus = (req, res, next) =>{
+    if(!req.body.status){
+        return res.status(400).json({
+            "status": 400,
+            "error": "Bad Request"
+        });
+    };
+
+    next();
+};
+
+export const verifyAdmin = (req, res, next) => {
+    if(req.user.type.toLowerCase() === "staff" && req.user.isAdmin){
+        next()
+    }else{
+        res.status(403).json({
+            "status": 403,
+            "error": "You do not have access to this page"
+        })
+    }
+}
