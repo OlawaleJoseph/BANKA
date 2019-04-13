@@ -163,7 +163,6 @@ describe("User Controllers", () => {
                 isAdmin: true
             })
             .end((err, res) => {
-                
                 assert.equal(res.body.status, 201, "Response status should be 201");
                 assert.equal(res.body.data.type, "staff","Response body should have type of staff")
                 assert.isObject(res.body.data, "Data should be an object");
@@ -182,7 +181,6 @@ describe("User Controllers", () => {
                 "password": "password"
             })
             .end((err, res) => {
-                
                 assert.equal(res.body.status, 200, "Response status should be 200");
                 assert.hasAllKeys(res.body, ["status", "data"],"Response body should have status and data keys")
                 assert.isObject(res.body.data, "Data should be an object");
@@ -241,8 +239,9 @@ describe("User Controllers", () => {
         it("Should return an array of users", () => {
             chai.request(server)
             .get('/api/v1/auth')
+            .set("x-access-token", token)
             .end((err, res) => {
-              
+
                 assert.equal(res.body.status, 200, "Status should be 200");
                 assert.isArray(res.body.data, "Data should be an array")
                 
@@ -254,10 +253,10 @@ describe("User Controllers", () => {
     describe("GET/me Should get a specific user", () => {
         it("Should return a specific user", () => {
             chai.request(server)
-            .get('/api/v1/auth/auth/me')
+            .get('/api/v1/auth/me')
             .set("x-access-token", token)
             .end((err, res) => {
-                
+
                 assert.isObject(res.body, "Response body should be an object");
                 assert.equal(res.body.status, 200, "Status should be 200");
                 assert.hasAnyDeepKeys(res.body.data, ["id", "firstName", "lastName","email"]);
@@ -266,7 +265,7 @@ describe("User Controllers", () => {
 
         it("Should return an error message for invalid token", () => {
             chai.request(server)
-            .get('/api/v1/auth/auth/me')
+            .get('/api/v1/auth/me')
             .set("x-access-token", "abc")
             .end((err, res) => {
               
@@ -278,12 +277,14 @@ describe("User Controllers", () => {
         
     });
 
-    describe("PATCH/me Should get a specific user", () => {
+    describe("PATCH/me Should update a specific user", () => {
         it("Should update user's password", () => {
             chai.request(server)
             .patch('/api/v1/auth/me')
             .set("x-access-token", token)
+            .send({password: "newpassword"})
             .end((err, res) => {
+                console.log(res.body, "Updated")
                 assert.isObject(res.body, "Response body should be an object");
                 assert.equal(res.body.status, 200, "Status should be 200");
                 assert.isString(res.body.message, "message should be string")
@@ -294,8 +295,9 @@ describe("User Controllers", () => {
             chai.request(server)
             .patch('/api/v1/auth/me')
             .set("x-access-token", "abc")
+            .send({password: "newpassword"})
             .end((err, res) => {
-             
+                console.log(res.body, "Error")
                 assert.isObject(res.body, "Response body should be an object");
                 assert.equal(res.body.status, 400, "Status should be 400");
                 assert.isString(res.body.error, "Error message should be string");
@@ -304,23 +306,22 @@ describe("User Controllers", () => {
         
     });
 
-    describe("DELETE/:ID to delete a user", () => {
+    describe.only("DELETE/:ID to delete a user", () => {
         
-        it("Should have status of 200", () => {
+        it("Should have status of 203", () => {
             chai.request(server)
             .delete('/api/v1/auth/' + user.id)
             .set("x-access-token", token)
             .end((err, res) => {
-
                 assert.isNotEmpty(res.body, "res.body shouldn't be empty");
-                assert.equal(res.body.status, 200, "Status should be 200");
+                assert.equal(res.body.status, 203, "Status should be 200");
                 assert.isString(res.body.message, "message property should be string");
             });
         });
 
         it("Should have status of 400 for invalid id", () => {
             chai.request(server)
-            .delete('/api/v1/auth/' + 0)
+            .delete('/api/v1/auth/' + 999)
             .set("x-access-token", token)
             .end((err, res) => {
 
@@ -333,16 +334,16 @@ describe("User Controllers", () => {
         
     });
 
-    describe("POST/auth/reset", function (){
+    describe("PATCH/auth/reset", function (){
         this.timeout(10000);
         it("Should reset user  password", (done) => {
             chai.request(server)
-            .put('/api/v1/auth/reset')
+            .patch('/api/v1/auth/reset')
             .send({
                 "email": "mike@gmail.com",
             })
             .end((err, res) => {
-                
+                console.log(res.body, "Body")
                 assert.equal(res.body.status, 200, "Response status should be 200");
                 assert.hasAllKeys(res.body, ["status", "message"],"Response body should have status and data keys")
                 assert.isString(res.body.message, "Data should be a string");
@@ -353,7 +354,7 @@ describe("User Controllers", () => {
 
         it("Should have a 400 status", (done) => {
             chai.request(server)
-            .post('/api/v1/auth/reset')
+            .patch('/api/v1/auth/reset')
             .send({"email": "abcde@gmail.com"})
             .end((err, res) => {
                 

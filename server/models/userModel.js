@@ -77,7 +77,7 @@ class User {
     const hashedPassword = await hashPassword(newPassword);
     user.password = hashedPassword;
     user.updatedDate = moment();
-    return this.usersDb[index];
+    return user;
   }
 
   deleteUser(id) {
