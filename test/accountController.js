@@ -133,4 +133,44 @@ describe("Account Controller", () => {
             });
         });
     });
+
+    describe("PATCH/:accountNumber Should update the account status", () => {
+        it("Should return 200 status and update the account", () => {
+            chai.request(server)
+            .patch('/api/v1/accounts/' + account.accountNumber)
+            .set('x-access-token', adminToken)
+            .send({status: "draft"})
+            .end((err, res) => {
+                
+                assert.isObject(res.body.data);
+                assert.equal(res.body.data.status, account.status)
+                
+            });
+        });
+        
+
+        it("Should return 400 for empty status", () => {
+            chai.request(server)
+            .patch('/api/v1/accounts/' + account.accountNumber)
+            .set('x-access-token', adminToken)
+            .send({status: ""})
+            .end((err, res) => {
+               
+                assert.equal(res.body.status, 400, "Status should be 400");
+                
+            });
+        });
+
+        it("Should return 400 for invalid account number", () => {
+            chai.request(server)
+            .patch('/api/v1/accounts/765654478')
+            .set('x-access-token', adminToken)
+            .send({status: ""})
+            .end((err, res) => {
+               
+                assert.equal(res.body.status, 400, "Status should be 400");
+                
+            });
+        });
+    });
 });
