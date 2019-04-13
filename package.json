@@ -6,7 +6,8 @@
   "scripts": {
     "devStart": "babel-node ./server/app.js",
     "lint": "./node_modules/.bin/eslint ./server/app.js",
-    "test": "mocha --require @babel/register --require @babel/polyfill --timeout 5000 --exit"
+    "devTest": "mocha --require @babel/register --require @babel/polyfill --timeout 5000 --exit",
+    "test": " nyc --reporter=text --require @babel/register --require @babel/polyfill  mocha --timeout 10000 --exit"
   },
   "repository": {
     "type": "git",
