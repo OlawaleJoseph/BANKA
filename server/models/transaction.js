@@ -16,6 +16,7 @@ class Transaction {
 
 
       this.transactionDb.push(newTransaction);
+      console.log(newTransaction)
       return newTransaction;
     } catch (err) {
       console.log(err);
