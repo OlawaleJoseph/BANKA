@@ -1,6 +1,6 @@
 import express from 'express';
 import  transaction from '../Controllers/transactions';
-import {validateCashier } from '../middleware/validateStaff';
+import {validateCashier , validateAdmin} from '../middleware/validateStaff';
 
 const router = express.Router();
 
@@ -13,6 +13,6 @@ router.get('/', transaction.getAll);
 
 router.get('/:id', transaction.getOne)
 
-
+router.delete('/:id', validateAdmin, transaction.deleteTransaction);
 
 export default router;

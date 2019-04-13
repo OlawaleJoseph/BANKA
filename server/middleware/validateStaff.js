@@ -7,8 +7,8 @@ export const validateCashier = (req, res, next) => {
     }
 }
 
-export const validateStaff = (req, res, next) => {
-    if(req.user.type.toLowerCase() !== "staff"){
+export const validateAdmin = (req, res, next) => {
+    if(!req.user.isAdmin){
         res.status(403).json({
             "status": 403,
             "error": "You do not have access to view this page"

@@ -21,7 +21,7 @@ class Transaction {
         "data": {
           "id": transaction.id,
           "type": transaction.type,
-          "accountNumber": transaction.accountNumber,
+          "accountNumber": parseIn(transaction.accountNumber, 10),
           "cashier": req.user.id,
           "type": "Debit",
           "oldBalance": transaction.oldBalance,
@@ -45,7 +45,7 @@ class Transaction {
         "data": {
           "id": transaction.id,
           "type": transaction.type,
-          "accountNumber": transaction.accountNumber,
+          "accountNumber": parseIn(transaction.accountNumber, 10),
           "cashier": req.user.id,
           "oldBalance": transaction.oldBalance,
           "newBalance": transaction.newBalance,
@@ -123,6 +123,24 @@ class Transaction {
                 "status": 200,
                 "data": foundTransaction
             })
+        }
+        
+    }
+
+    deleteTransaction(req, res){
+        const id = parseInt(req.params.id, 10)
+        const unwantedTransaction = transactionModel.deleteTransaction(id);
+        console.log(unwantedTransaction)
+        if(unwantedTransaction.length > 0){
+           return  res.status(203).json({
+                "status": 203,
+                "message": "Transaction successfully deleted",
+            });
+        }else{
+           return res.status(404).json({
+                "status": 404,
+                "error": "Transaction not found",
+            });
         }
         
     }
