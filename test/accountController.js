@@ -119,4 +119,18 @@ describe("Account Controller", () => {
         
         });
     });
+
+    describe("GET/:accountNumber Should get an account with the given id", () => {
+        it("Should return 200 status with the account object", () => {
+            chai.request(server)
+            .get('/api/v1/accounts/' + account.accountNumber)
+            .set('x-access-token', token)
+            .end((err, res) => {
+                
+                assert.equal(res.body.status, 200, "Status should be 200");
+                assert.hasAllKeys(res.body.data, ["id", "owner", "accountNumber", "type", "balance"]);
+                
+            });
+        });
+    });
 });
