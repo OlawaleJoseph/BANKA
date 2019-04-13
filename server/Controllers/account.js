@@ -31,7 +31,17 @@ class Account {
     });
   };
 
-  
+  getOne(req, res){
+    const account = accountModel.getAccount(req.params.accountNumber);
+    if (!account) { return res.status(400).json({
+        "status": 400,
+        "error": "Account not found"
+    })}
+    res.status(200).json({
+        "status": 200,
+        "data": account
+    })
+  };
 }
 
 
