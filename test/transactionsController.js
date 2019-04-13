@@ -107,4 +107,18 @@ describe.only("TRANSACTION CONTROLLER", () => {
         })
     ]);
     
+    describe("GET/ Should return a transactions", () => [
+        it("Should return status of 200 with an array of transaction objects", () => {
+            chai.request(server)
+            .get("/api/v1/transactions/")
+            .set("x-access-token", adminToken)
+            .end((err, res) => {
+                
+                assert.isArray(res.body)
+                assert.equal(res.body.status, 200);
+            })
+        })
+    ]);
+
+
 });
