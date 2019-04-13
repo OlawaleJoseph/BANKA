@@ -155,6 +155,7 @@ describe("User Controllers", () => {
         it("Should create new Staff user", (done) => {
             chai.request(server)
             .post('/api/v1/auth/signupStaff')
+            .set("x-access-token", token)
             .send({
                 firstName: "Seun",
                 lastName: "Oke",
@@ -284,7 +285,6 @@ describe("User Controllers", () => {
             .set("x-access-token", token)
             .send({password: "newpassword"})
             .end((err, res) => {
-                console.log(res.body, "Updated")
                 assert.isObject(res.body, "Response body should be an object");
                 assert.equal(res.body.status, 200, "Status should be 200");
                 assert.isString(res.body.message, "message should be string")
@@ -297,7 +297,6 @@ describe("User Controllers", () => {
             .set("x-access-token", "abc")
             .send({password: "newpassword"})
             .end((err, res) => {
-                console.log(res.body, "Error")
                 assert.isObject(res.body, "Response body should be an object");
                 assert.equal(res.body.status, 400, "Status should be 400");
                 assert.isString(res.body.error, "Error message should be string");
@@ -306,7 +305,7 @@ describe("User Controllers", () => {
         
     });
 
-    describe.only("DELETE/:ID to delete a user", () => {
+    describe("DELETE/:ID to delete a user", () => {
         
         it("Should have status of 203", () => {
             chai.request(server)
@@ -343,7 +342,6 @@ describe("User Controllers", () => {
                 "email": "mike@gmail.com",
             })
             .end((err, res) => {
-                console.log(res.body, "Body")
                 assert.equal(res.body.status, 200, "Response status should be 200");
                 assert.hasAllKeys(res.body, ["status", "message"],"Response body should have status and data keys")
                 assert.isString(res.body.message, "Data should be a string");

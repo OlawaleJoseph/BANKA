@@ -28,7 +28,6 @@ class User{
 
   async createStaff(req, res){
     const user = await userModel.createStaff(req.body);
-    console.log(user)
     if(!user){return res.status(400).send('Invalid Input')}
     try{
       const token = await userModel.generateToken(user.email)
@@ -42,7 +41,8 @@ class User{
           "id": user.id,
           "firstName": user.firstName,
           "lastName": user.lastName,
-          "email": user.email
+          "email": user.email,
+          "type": user.type
         }
       })
     }catch(err){
