@@ -4,6 +4,9 @@
   "description": "Banka is a light-weight core banking application that powers banking operations like account",
   "main": "app.js",
   "scripts": {
+    "clean": "rm -rf build && mkdir build",
+    "build": "npm run clean && babel server/ -d build",
+    "start": "npm run build && node build/app.js",
     "devStart": "babel-node ./server/app.js",
     "lint": "./node_modules/.bin/eslint ./server/app.js",
     "devTest": "mocha --require @babel/register --require @babel/polyfill --timeout 5000 --exit",
