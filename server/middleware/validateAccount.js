@@ -65,3 +65,14 @@ export const verifyAdmin = (req, res, next) => {
         })
     }
 }
+
+export const accountType = ( req, res, next) => {
+    if(/\D/.test(req.params.accountNumber)){
+        return res.status(400).json({
+            "status": 400,
+            "error": "Invalid input"
+        })
+    }else{
+        next();
+    }
+}
