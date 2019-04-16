@@ -62,8 +62,8 @@ export const validateSignUp = (req, res, next) => {
          })
     }else{
         const user = userModel.getAUser(req.body.email);
-        if(user){ return res.status(400).json({
-            "status": 400,
+        if(user){ return res.status(409).json({
+            "status": 409,
             "error": "Email already registered"
         })}
     }
