@@ -3,8 +3,8 @@ import accountModel from '../models/account';
 export const noMultipleAccounts = (req, res, next) => {
     const ownsAccount = accountModel.accountsDb.find(acc => acc.owner == req.user.id)
     if(ownsAccount){
-        return res.status(400).json({
-            "status": 400,
+        return res.status(409).json({
+            "status": 409,
             "error": "User already has an account"
         });
     }else{
@@ -63,5 +63,16 @@ export const verifyAdmin = (req, res, next) => {
             "status": 403,
             "error": "You do not have access to this page"
         })
+    }
+}
+
+export const accountType = ( req, res, next) => {
+    if(/\D/.test(req.params.accountNumber)){
+        return res.status(400).json({
+            "status": 400,
+            "error": "Invalid input"
+        })
+    }else{
+        next();
     }
 }

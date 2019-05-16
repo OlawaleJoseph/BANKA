@@ -1,13 +1,14 @@
 import express from 'express';
 import  transaction from '../Controllers/transactions';
 import {validateCashier , validateAdmin} from '../middleware/validateStaff';
+import {accountType} from '../middleware/validateAccount'
 
 const router = express.Router();
 
 
-router.post('/:accountNumber/debit', validateCashier,  transaction.debit);
+router.post('/:accountNumber/debit', [accountType, validateCashier],  transaction.debit);
 
-router.post('/:accountNumber/credit', validateCashier,  transaction.credit);
+router.post('/:accountNumber/credit', [accountType, validateCashier],  transaction.credit);
 
 router.get('/', transaction.getAll);
 

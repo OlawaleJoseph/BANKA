@@ -10,7 +10,7 @@ class User{
       const subject = "Welcome to BANKA";
       const message = `Welcome to Banka, Your NO.1 BANK!!!`
       const mail = await sendMail(user.email, subject, message);
-      res.json({
+      res.status(200).json({
         "status": 201,
         "data": {
           token,
@@ -143,14 +143,14 @@ class User{
         if(req.user.isAdmin){
             const user = userModel.deleteUser(req.params.id);
             if(user){
-                res.status(200).json({
-                    "status": 203,
+                res.status(204).json({
+                    "status": 204,
                     "message": "User deleted successfully"
                 })
             }else{
                 res.status(400).json({
-                    "status": 400,
-                    "error": "Invalid User"
+                    "status": 404,
+                    "error": "User does not exist"
                 })
             }
         }else{
